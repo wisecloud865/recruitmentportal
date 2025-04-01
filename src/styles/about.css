@@ -1,0 +1,879 @@
+:root {
+    --primary-blue: #1A65C7;    /* Main blue */
+    --secondary-blue: #3B7FD9;   /* Lighter blue */
+    --dark-blue: #1E2235;        /* Dark blue-gray */
+    --primary-pink: #E0A0A3;    /* Main rose pink */
+    --secondary-pink: #E8B4B6;   /* Lighter rose pink */
+    --dark-pink: #D38D90;        /* Darker rose pink */
+    --primary-black: #000000;    /* Pure black */
+    --secondary-black: #333333;   /* Dark gray */
+    --dark-gray: #666666;        /* Medium gray */
+    --light-gray: #999999;       /* Light gray */
+    --white: #FFFFFF;
+    --gray: #666666;
+    --background-dark: #121212;
+    --background-darker: #000000;
+}
+
+/* Fixed navbar stays on top */
+.navbar {
+    background-color: rgba(30, 34, 53, 0.95); /* Semi-transparent dark-blue */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures navbar is always above */
+    height: 60px;
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+html, body {
+    height: 100%; /* Make sure these take up the full screen */
+}
+
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--dark-pink);
+    color: var(--white);
+    width: 100%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push the footer to the bottom */
+    background: radial-gradient(circle at top, rgba(44, 62, 80, 0.8) 0%, var(--dark-blue) 70%);
+    background-attachment: fixed;
+}
+
+/* Content starts below the navbar */
+.content {
+    position: relative;
+    z-index: 1; /* Lower than navbar */
+    padding-top: 60px; /* Height of the navbar */
+    width: 90%; /* Take 90% of the width */
+    max-width: 1600px; /* Limit the content width */
+    margin: 0 auto; /* Center the content */
+    flex: 1; /* Allow content to grow and fill available space */
+}
+
+.nav-container {
+    width: 100%; /* Full width */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0; /* Remove container padding */
+    position: relative;
+}
+
+.nav-brand {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    margin-left: 0; /* Remove left margin */
+    padding: 0 1em; /* Add horizontal padding */
+    background-color: var(--dark-blue); /* Match navbar background */
+    position: absolute;
+    left: 0;
+}
+
+.nav-logo {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-links {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Center the links */
+    gap: 2em;
+    padding: 0; /* Remove right padding */
+    margin: 0 auto; /* Center in available space */
+}
+
+.nav-link {
+    color: var(--white); /* Change text color to white for better contrast */
+    text-decoration: none;
+    font-size: 1em;
+    padding: 0.5em 1em;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--white);
+    background-color: var(--primary-pink);
+}
+
+.nav-link.active {
+    color: var(--white);
+    background-color: var(--primary-pink);
+}
+
+/* Update header styling */
+header {
+    background: url('../assets/images/wisecloud_team.jpg') center/cover no-repeat;
+    padding: 5em 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+    margin-top: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 700px;
+    background-size: cover; /* Ensure the image covers the entire header */
+    background-position: center; /* Center the image */
+}
+
+/* Add a semi-transparent pink overlay */
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background-color: rgba(224, 160, 163, 0.9); semi-transparent pink */
+    z-index: 1;
+    display: block;
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+    padding: 2em 0;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 300px;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-top: 4em; /* Add more padding at the top to account for navbar */
+}
+
+/* Update logo container for better contrast against darker background */
+/* .logo-container {
+    width: 800px;  /* Increased width significantly */
+    /* height: auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.95); /* more opaque white */
+    /* border-radius: 15px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease; */
+/* } */
+
+/* Remove the ::after pseudo-element that was creating the WC text */
+.logo-container::after {
+    content: none;
+}
+
+.logo-container:hover {
+    transform: scale(1.05);
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* Update text colors for better contrast */
+header h1 {
+    color: var(--white);
+    font-size: 2.5em;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Main Content Styles */
+main {
+    max-width: 1600px; /* Increased max-width */
+    margin: 0 auto;
+    padding: 2em; /* Reduced padding */
+    background-color: transparent;
+    flex: 1;
+    margin-bottom: 80px; /* Reduced margin */
+    border-radius: 15px; /* Added border-radius */
+    margin-top: 3em; /* Reduced margin */
+}
+
+/* Section Styles */
+.animated-section {
+    background-color: var(--primary-pink); /* Pinkish background */
+    padding: 3em;
+    margin-bottom: 3em;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease-out forwards; /* Adjusted animation */
+    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Added transition */
+}
+
+.animated-section:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.animated-section:nth-child(2) {
+    animation-delay: 0.4s; /* Adjusted delay */
+}
+
+.animated-section:nth-child(3) {
+    animation-delay: 0.8s; /* Adjusted delay */
+}
+
+/* Keyframes for Animation */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* About Content Styles */
+.about-content {
+    margin-bottom: 3em;
+    padding: 4em;
+    border-radius: 30px;
+    background-color: var(--primary-black); /* Black background */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    border: 1px solid rgba(75, 119, 190, 0.2); /* Blueish border */
+    text-align: center; /* Center the content */
+}
+
+.about-content:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.about-content h2 {
+    color: var(--primary-pink);
+    margin-bottom: 1.4em;
+    font-size: 2.8em;
+    text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 2;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.4s ease;
+}
+
+.about-content:hover h2 {
+    color: var(--secondary-pink);
+}
+
+.about-content p {
+    font-size: 2em;
+    line-height: 1.8;
+    color: var(--white);   
+    margin-bottom: 2em;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    transition: color 0.4s ease;
+}
+
+.about-content:hover p {
+    color: var(--primary-pink);
+}
+
+.about-content h3 {
+    color: var(--secondary-pink);
+    margin-top: 2.5em;
+    margin-bottom: 1.2em;
+    font-size: 2.8em;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 2;
+    letter-spacing: 0.5px;
+    transition: color 0.4s ease;
+    text-align: center; /* Center the heading */
+}
+
+.about-content:hover h3 {
+    color: var(--primary-pink);
+}
+
+.about-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.about-content li {
+    font-size: 1.3em;
+    color: var(--white);
+    margin: 0.7em 1.5em;
+    padding: 0.8em 1.6em;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
+}
+
+.about-content li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.4);
+    color: var(--primary-pink);
+}
+
+/* Partner Logos Styles */
+.partner-logos {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 3em;
+    position: relative;
+    z-index: 2;
+}
+
+.partner-logos img {
+    width: 200px; /* Increased width */
+    height: auto;
+    margin: 1.2em;
+    border-radius: 16px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.45);
+    transition: transform 0.4s ease;
+}
+
+.partner-logos img:hover {
+    transform: scale(1.15);
+}
+
+/* Stats Styles */
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3.5em;
+    position: relative;
+    z-index: 2;
+    padding: 1.5em; /* Add padding around the stats */
+    border-radius: 15px; /* Add a rounded border */
+    background-color: rgba(255, 255, 255, 0.05); /* Add a subtle background color */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Add a subtle shadow */
+}
+
+.stat-item {
+    text-align: center;
+    transition: transform 0.4s ease;
+    padding: 1em; /* Add padding around each stat item */
+    border-radius: 10px; /* Add a rounded border */
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.1); /* Add a subtle background color on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhance the shadow on hover */
+}
+
+.stat-item i {
+    font-size: 2.5em;
+    color: var(--secondary-pink);
+    margin-bottom: 0.8em;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    transition: color 0.4s ease;
+}
+
+.stat-item:hover i {
+    color: var(--primary-pink);
+}
+
+.stat-number {
+    font-size: 2.6em;
+    font-weight: bold;
+    color: var(--white);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    transition: color 0.4s ease;
+}
+
+.stat-item:hover .stat-number {
+    color: var(--secondary-pink);
+}
+
+.stat-label {
+    font-size: 1.4em;
+    color: var(--light-gray);
+    transition: color 0.4s ease;
+}
+
+.stat-item:hover .stat-label {
+    color: var(--white);
+}
+
+/* Gradient Overlay */
+.about-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(30, 34, 53, 0) 0%, rgba(30, 34, 53, 0.4) 100%);
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 30px; /* Match border-radius */
+}
+
+/* Timeline Styles */
+.timeline {
+    position: relative;
+    padding: 3em 0;
+    margin-top: 4em;
+    background-image: url('../assets/images/Wordmark_circle_white.png'); /* Add background image */
+    background-size: 900px; /* Adjust as needed */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 5px; /* Slightly thicker line */
+    background-color: var(--dark-blue);
+    transform: translateX(-50%);
+    border-radius: 5px; /* More rounded line */
+    /* box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); Removed shadow */
+}
+
+.timeline-item {
+    margin-bottom: 3.5em; /* Increased margin */
+    position: relative;
+}
+
+.timeline-item:nth-child(odd) {
+    padding-right: 50%;
+    text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+    padding-left: 50%;
+    text-align: left;
+}
+
+.timeline-content {
+    padding: 2.3em; /* Slightly increased padding */
+    background-color: var(--dark-blue); /* Pinkish background */
+    border-radius: 20px; /* More rounded corners */
+    /* box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); Removed shadow */
+    position: relative;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(232, 180, 182, 0.3); /* Added border */
+}
+
+.timeline-content:hover {
+    transform: translateY(-8px); /* Increased lift on hover */
+    box-shadow: 0 7px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow on hover */
+}
+
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.timeline-item:nth-child(odd) .timeline-content::before {
+    right: -25px; /* Adjusted position */
+    border-width: 16px 0 16px 25px; /* Adjusted size */
+    border-color: transparent transparent transparent rgba(232, 180, 182, 0.15); /* Pinkish color */
+}
+
+.timeline-item:nth-child(even) .timeline-content::before {
+    left: -25px; /* Adjusted position */
+    border-width: 16px 25px 16px 0; /* Adjusted size */
+    border-color: transparent rgba(232, 180, 182, 0.15) transparent transparent; /* Pinkish color */
+}
+
+.timeline-content h3 {
+    color: var(--dark-pink); /* Darker pink heading */
+    margin-bottom: 1.1em;
+    font-size: 2.2em; /* Slightly larger font size */
+    /* text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); Removed shadow */
+}
+
+.timeline-content p {
+    font-size: 1.5em; /* Slightly larger font size */
+    line-height: 1.9; /* Increased line height */
+    color: var(--white); /* Lighter pink text */
+    /* text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); Removed shadow */
+}
+
+/* Add icon styles */
+.timeline-item::after {
+    content: '\f0da'; /* Unicode for a right arrow, change as needed */
+    font-family: FontAwesome; /* Make sure FontAwesome is linked */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2em;
+    color: var(--secondary-pink);
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
+    text-align: center;
+    z-index: 1;
+}
+
+.timeline-item:nth-child(odd)::after {
+    left: auto;
+    right: -40px; /* Adjust position for odd items */
+}
+
+.timeline-item:nth-child(even)::after {
+    left: -40px; /* Adjust position for even items */
+}
+
+.timeline-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 2.5em;
+ 
+    color: var(--secondary-pink);
+}
+
+/* Team Section Styles */
+.team-section {
+    margin-top: 6em;
+    padding: 4em;
+    border-radius: 25px;
+    background-color: rgba(30, 34, 53, 0.7);
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    transition: all 0.4s ease;
+    border: 2px solid rgba(232, 180, 182, 0.3); /* Added border */
+    background-image: url('../assets/images/wc_gif.gif'); /* Add GIF background */
+    background-size: cover; /* Cover the entire area */
+    background-position: center; /* Center the GIF */
+    /* Ensure content is visible above the GIF */
+    color: white; /* Set a default text color */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add a text shadow */
+}
+
+.team-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 9px 22px rgba(0, 0, 0, 0.4);
+    border-color: rgba(232, 180, 182, 0.5); /* Darker border on hover */
+}
+
+.team-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(30, 34, 53, 0) 0%, rgba(232, 180, 182, 0.2) 100%);
+    z-index: 1;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0.8;
+}
+
+.team-section h2 {
+    color: var(--primary-pink);
+    margin-bottom: 1.5em;
+    font-size: 3.4em;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.team-section h2:hover {
+    color: var(--secondary-pink);
+}
+
+.team-members {
+    display: flex;
+    justify-content: center;
+    gap: 4.5em;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+}
+
+.team-member {
+    text-align: center;
+    width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 1.7em;
+    border-radius: 18px;
+    background-color: var(--dark-blue);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(232, 180, 182, 0.3); /* Added border */
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+    border-color: rgba(232, 180, 182, 0.5); /* Darker border on hover */
+}
+
+.team-member img {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1.3em;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.team-member img:hover {
+    transform: scale(1.15);
+}
+
+.team-member h3 {
+    color: var(--secondary-pink);
+    margin-bottom: 0.9em;
+    font-size: 1.7em;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.team-member p {
+    font-size: 1.3em;
+    color: var(--light-gray);
+    line-height: 1.7;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.team-member p::before {
+    content: "“";
+    font-size: 1.6em;
+    color: var(--secondary-pink);
+    position: relative;
+    top: 5px;
+}
+
+.team-member p::after {
+    content: "”";
+    font-size: 1.6em;
+    color: var(--secondary-pink);
+    position: relative;
+    bottom: 5px;
+}
+
+/* Team Section Styles */
+#our-team {
+    margin-top: 6em;
+    padding: 4em;
+    border-radius: 25px;
+    background-color: var(--dark-pink);
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    transition: all 0.4s ease;
+    border: 2px solid rgba(232, 180, 182, 0.3);
+    background-image: url('../assets/images/wc_gif.gif');
+    background-size: 1800px; /* Adjust the size as needed */
+    background-position:left left left left center center; /* Align to the left and center vertically */
+    background-repeat: no-repeat;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+#our-team:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 9px 22px rgba(0, 0, 0, 0.4);
+    border-color: rgba(232, 180, 182, 0.5); /* Darker border on hover */
+}
+
+#our-team::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(30, 34, 53, 0) 0%, rgba(232, 180, 182, 0.2) 100%);
+    z-index: 1;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0.8;
+}
+
+#our-team h2 {
+    color: var(--primary-black);
+    margin-bottom: 1.5em;
+    font-size: 3.2em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    position: relative;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+#our-team h2:hover {
+    color: var(--dark-blue);
+}
+
+/* Gradient Overlay */
+.about-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(30, 34, 53, 0) 0%, rgba(30, 34, 53, 0.4) 100%); /* Adjusted gradient */
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 30px; /* Match border-radius */
+}
+
+/* Our Story Styles */
+#our-story {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Remove the ::before pseudo-element */
+/* #our-story::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(30, 34, 53, 0) 0%, rgba(30, 34, 53, 0.3) 100%);
+    z-index: 1;
+    pointer-events: none;
+    border-radius: inherit; /* Inherit border-radius from parent */
+
+
+#our-story .about-content {
+    position: relative;
+    z-index: 2; /* Ensure content is above the gradient */
+}
+
+#our-story .about-content h2 {
+    text-align: center;
+    color: var(--primary-pink);
+    margin-bottom: 1em;
+    font-size: 2.5em;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+#our-story .about-content p {
+    position: relative;
+    padding: 1.4em; /* Slightly smaller padding */
+    border-radius: 16px; /* Slightly less rounded corners */
+    background-color: var(--dark-blue);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12); /* Reduced shadow */
+    margin-bottom: 2.6em; /* Reduced margin */
+    color: var(--white);
+    font-style: italic;
+    letter-spacing: 0.6px;
+    word-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15); /* Reduced text shadow */
+    transition: all 0.3s ease;
+    text-align: left;
+    border-left: 4px solid var(--secondary-pink); /* Slightly thinner border */
+    padding-left: 1.4em; /* Adjust padding for border */
+    font-size: 1.5em; /* Reduced font size */
+    line-height: 1.5; /* Reduced line height */
+}
+
+#our-story .about-content p:hover {
+    color: var(--primary-pink); /* Changed text color on hover */
+    background-color: rgba(75, 119, 190, 0.2); /* Changed background color on hover */
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2); /* Reduced hover shadow */
+    transform: translateY(-5px); /* Reduced lift on hover */
+    border-left-color: var(--primary-pink);
+}
+
+/* Add quotation marks */
+#our-story .about-content p::before {
+    content: "“";
+    position: absolute;
+    top: 0.4em;
+    left: 0.4em;
+    font-size: 1.8em; /* Smaller quotes */
+    color: var(--secondary-pink);
+    opacity: 0.6; /* Slightly less visible quotes */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15); /* Reduced shadow on quotes */
+}
+
+#our-story .about-content p::after {
+    content: "”";
+    position: absolute;
+    bottom: 0.4em;
+    right: 0.4em;
+    font-size: 1.8em; /* Smaller quotes */
+    color: var(--secondary-pink);
+    opacity: 0.6;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15); /* Reduced shadow on quotes */
+}
+
+/* Footer Styles */
+
+.footer {
+    background-color: var(--dark-pink); /* Background color */
+    color: var(--white); /* Text color */
+    text-align: center;
+    padding: 2em 0;
+    width: 100%;
+    margin-top: auto; /* Ensure no top margin */
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-content p {
+    margin: 0.5em 0;
+    font-size: 1.2em;
+}
+
+.social-icons {
+    margin-top: 1em;
+}
+
+.social-icons a {
+    color: var(--white); /* Icon color */
+    margin: 0 0.5em;
+    font-size: 1.5em;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--primary-pink); /* Icon hover color */
+}

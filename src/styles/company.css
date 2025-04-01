@@ -1,0 +1,575 @@
+/* Add or override styles from main.css as needed */
+:root {
+    --primary-blue: #1A65C7;    /* Main blue */
+    --secondary-blue: #3B7FD9;   /* Lighter blue */
+    --dark-blue: #1E2235;        /* Dark blue-gray */
+    --primary-pink: #E0A0A3;    /* Main rose pink */
+    --secondary-pink: #E8B4B6;   /* Lighter rose pink */
+    --dark-pink: #D38D90;        /* Darker rose pink */
+    --primary-black: #000000;    /* Pure black */
+    --secondary-black: #333333;   /* Dark gray */
+    --dark-gray: #666666;        /* Medium gray */
+    --light-gray: #999999;       /* Light gray */
+    --white: #FFFFFF;
+    --gray: #666666;
+    --background-dark: #121212;
+    --background-darker: #000000;
+}
+
+/* Fixed navbar stays on top */
+.navbar {
+    background-color: rgba(30, 34, 53, 0.95); /* Semi-transparent dark-blue */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures navbar is always above */
+    height: 60px;
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--dark-blue);
+    color: var(--white);
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    
+    background: radial-gradient(circle at top, rgba(44, 62, 80, 0.8) 0%, var(--dark-blue) 70%);
+    background-attachment: fixed;
+}
+
+/* Content starts at the very top */
+.content {
+    position: relative;
+    z-index: 1; /* Lower than navbar */
+    min-height: 200vh; /* Make sure there's enough scrolling space */
+    /* Remove margin-top and padding-top */
+}
+
+
+.nav-container {
+    width: 100%; /* Full width */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0; /* Remove container padding */
+    position: relative;
+}
+
+.nav-brand {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    margin-left: 0; /* Remove left margin */
+    padding: 0 1em; /* Add horizontal padding */
+    background-color: var(--dark-blue); /* Match navbar background */
+    position: absolute;
+    left: 0;
+}
+
+.nav-logo {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-links {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Center the links */
+    gap: 2em;
+    padding: 0; /* Remove right padding */
+    margin: 0 auto; /* Center in available space */
+}
+
+.nav-link {
+    color: var(--white); /* Change text color to white for better contrast */
+    text-decoration: none;
+    font-size: 1em;
+    padding: 0.5em 1em;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--white);
+    background-color: var(--primary-pink);
+}
+
+.nav-link.active {
+    color: var(--white);
+    background-color: var(--primary-pink);
+}
+
+header {
+    background: url('../assets/images/wc_gif.gif') center/cover no-repeat;
+    padding: 5em 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+    margin-top: 0; /* Remove margin-top */
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin-bottom: 8em; /* Add margin-bottom to the header */
+}
+
+/* Add a semi-transparent pink overlay */
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(224, 160, 163, 0.9); /* semi-transparent pink */
+    z-index: 1;
+    display: block;
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+    padding: 2em 0;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 300px;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-top: 4em; /* Add more padding at the top to account for navbar */
+}
+
+/* Update logo container for better contrast against darker background */
+.logo-container {
+    width: 800px;  /* Increased width significantly */
+    height: auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.95); /* more opaque white */
+    border-radius: 15px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+/* Remove the ::after pseudo-element that was creating the WC text */
+.logo-container::after {
+    content: none;
+}
+
+.logo-container:hover {
+    transform: scale(1.05);
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* Update text colors for better contrast */
+header h1 {
+    color: var(--white);
+    font-size: 2.5em;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+
+/* Search bar styles */
+/* Floating Search Bar */
+.search-wrapper {
+    position: absolute; /* Absolute position so it floats */
+    top: 47%; /* Adjust this value to be in the middle */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centering horizontally and vertically */
+    z-index: 500; /* Ensures it stays above the body but below navbar */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Styling for the search bar */
+.search-container {
+    max-width: 800px;
+    width: 90%;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.95); /* Slight transparency */
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Input field */
+#search-input {
+    width: 70%;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 2px solid var(--primary-pink);
+    border-radius: 25px 0 0 25px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* Button styling */
+#search-button {
+    padding: 12px 25px;
+    font-size: 16px;
+    background-color: var(--primary-pink);
+    border: 2px solid var(--primary-pink);
+    border-left: none;
+    border-radius: 0 25px 25px 0;
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#search-button:hover {
+    background-color: var(--white);
+    color: var(--primary-pink);
+}
+
+/* Add Font Awesome for the search icon */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+/* Section title styles */
+.section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em; /* Space between icon and text */
+    width: 100%;
+    text-align: center;
+    font-size: 2.2em;
+    color: var(--white);
+    margin: 1em 0;
+    padding-bottom: 0.5em;
+    border-bottom: 3px solid var(--dark-pink);
+}
+
+/* Style for the "Candidates" heading with icon */
+.candidates-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em; /* Space between icon and text */
+    margin: 1em auto 0.5em auto;
+    font-style: italic;
+    border-bottom: 3px solid var(--secondary-pink);
+    padding-bottom: 0.3em;
+    text-align: center;
+    font-size: 2.5em; /* Increased font size */
+    width: 100%; /* Ensure it takes full width */
+}
+
+/* Style for FontAwesome icons */
+.section-title i,
+.candidates-heading i {
+    font-size: 1.2em; /* Adjust icon size as needed */
+    color: var(--primary-pink); /* Icon color */
+}
+
+.company-container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+   
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.table-title {
+    text-align: center; /* Center the text */
+    color: var(--primary-pink);
+    font-size: 1.8em;
+    margin-bottom: 0.8em;
+}
+
+.info-table {
+    width: 100%; /* Make the table wider */
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    table-layout: fixed; /* Ensure table respects column widths */
+    margin-top: 0.5em;
+    text-align: center; /* Center text inside the table */
+}
+
+.info-table th, .info-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.info-table th {
+    font-size: 1.5em; /* Increased font size */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1.9em; /* Increase padding */
+    background: rgba(224, 160, 163, 0.2); /* Soft pink background */
+    color: var(--primary-black); /* Changed color to black */
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-pink);
+    text-align: center; /* Centered text */
+}
+
+.info-label {
+    width: 40%; /* Reduced from 45% */
+    min-width: 100px; /* Reduced min-width */
+    padding: 1.5em; /* Increased padding */
+    font-size: 1.1em; /* Increased font size */
+    font-weight: 500;
+    color: var(--secondary-black);
+    background: rgba(255, 255, 255, 0.1); /* Subtle background */
+    text-align: center; /* Center the text */
+    vertical-align: middle; /* Vertically align the text */
+}
+
+.info-value {
+    width: 60%; /* Increased from 55% */
+    padding: 1.5em; /* Increased padding */
+    font-size: 1.1em; /* Increased font size */
+    color: var(--dark-gray);
+    background: var(--white);
+    text-align: center; /* Center the text */
+    vertical-align: middle; /* Vertically align the text */
+}
+
+.info-table tbody tr:hover .info-label {
+    color: var(--dark-pink);
+    padding-left: 2em;
+    border-color: var(--primary-pink);
+    box-shadow: 0 0 10px rgba(224, 160, 163, 0.2);
+}
+
+.info-table tbody tr:hover .info-value {
+    color: var(--primary-black);
+    background: rgba(255, 255, 255, 0.9);
+    border-color: var(--primary-pink);
+    box-shadow: 0 0 10px rgba(224, 160, 163, 0.2);
+}
+
+.info-table tr {
+    margin: 1em 0;
+    display: table-row; /* Ensure table row behaves normally */
+    width: 100%;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease;
+}
+
+.info-table tr:nth-child(even) {
+    background-color: rgba(224, 160, 163, 0.03); /* Light background for even rows */
+}
+
+.info-table td {
+    display: table-cell; /* Ensure proper table cell behavior */
+    width: 50%; /* Ensure two columns */
+    padding: 0.75em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    word-break: break-word; /* Ensure content wraps within cells */
+    text-align: center; /* Center text inside each cell */
+    vertical-align: middle; /* Align text vertically */
+}
+
+.info-table tbody tr:hover:not(.company-header):not(.candidate-header) {
+    background-color: rgba(224, 160, 163, 0.05);
+}
+
+.info-table tr:not(:last-child) td {
+    border-bottom: 1px solid #eee;
+}
+
+.candidate-header {
+    background: var(--white);
+    position: relative;
+    padding: 1em;
+    border-radius: 16px 16px 0 0;
+    margin-bottom: 0; /* Remove margin */
+}
+
+#candidates .candidate-header {
+    background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Increased from 10px */
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+    }
+}
+
+.table-container {
+    width: 90%; /* Adjust max-width */
+    max-width: 90%;
+    margin: 1em auto;
+    padding: 2em; /* Increase padding */
+    box-sizing: border-box;
+    min-width: 300px;
+    background: rgba(30, 34, 53, 0.3); /* Use dark-blue color with transparency */
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: slideIn 0.5s ease forwards;
+    opacity: 0;
+    margin-bottom: 2em; /* Add some vertical spacing between rows */
+}
+
+.table-container:hover::before {
+    opacity: 0.7;
+}
+
+.table-container:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 
+        0 20px 40px rgba(224, 160, 163, 0.2),
+        0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.table-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary-pink), var(--secondary-pink));
+    border-radius: 6px 6px 0 0;
+}
+
+.table-container::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, rgba(224, 160, 163, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.table-container:nth-child(2) { animation-delay: 0.1s; }
+.table-container:nth-child(3) { animation-delay: 0.2s; }
+
+.info-label:hover, .info-value:hover {
+    transform: scale(1.02);
+    z-index: 1;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .table-container {
+        width: 95%; /* Take up more width on smaller screens */
+        padding: 1.5em; /* Increase padding */
+        margin: 1.5em auto; /* Add margin on smaller screens */
+    }
+
+    .info-label,
+    .info-value {
+        width: 100%;
+        text-align: center;
+        padding: 2em; /* Increase padding */
+        font-size: 1em; /* Increase font size */
+    }
+
+    .candidate-header h3 {
+        font-size: 1.2em;
+    }
+
+    .info-table tr {
+        flex-direction: column; /* Stack on mobile */
+    }
+
+    .info-label,
+    .info-value {
+        width: 100%;
+        padding: 0.8em; /* Increase padding */
+    }
+
+    .info-table td {
+        width: 100%; /* Full width on smaller screens */
+        display: block; /* Stack on smaller screens */
+    }
+
+    .info-label {
+        text-align: left; /* Align left on smaller screens */
+    }
+}
+
+.info-table tbody tr:nth-child(n+4) {
+    display: none;
+}
+
+.info-table.expanded tbody tr:nth-child(n+4) {
+    display: table-row;
+}
+
+.info-table tbody tr:nth-child(n+4):not(.expanded) {
+    display: none !important;
+}
+
+.info-table.expanded tbody tr:nth-child(n+4) {
+    display: table-row !important;
+}
+
+.footer {
+    background-color: var(--dark-pink); /* Background color */
+    color: var(--white); /* Text color */
+    text-align: center;
+    padding: 2em 0;
+    width: 100%;
+    margin-top: auto; /* Ensure no top margin */
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-content p {
+    margin: 0.5em 0;
+    font-size: 1.2em;
+}
+
+.social-icons {
+    margin-top: 1em;
+}
+
+.social-icons a {
+    color: var(--white); /* Icon color */
+    margin: 0 0.5em;
+    font-size: 1.5em;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--primary-pink); /* Icon hover color */
+}
