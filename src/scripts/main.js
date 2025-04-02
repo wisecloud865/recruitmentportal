@@ -5,6 +5,11 @@ const CONFIG = {
       ? "/recruitmentportal/homepage-project-1"
       : "http://localhost:3000";
   },
+  get dataURL() {
+    return this.isProduction
+      ? "/recruitmentportal/homepage-project-1/src/data/Companies_and_candidates.json" // Updated path
+      : "http://localhost:3000/data/Companies_and_candidates.json";
+  },
 };
 
 // Helper function to show notifications
@@ -27,20 +32,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    console.log(
-      "Fetching data from:",
-      `${CONFIG.baseURL}/data/Companies_and_candidates.json`
-    );
-    const response = await fetch(
-      `${CONFIG.baseURL}/data/Companies_and_candidates.json`
-    );
+    console.log("Attempting to fetch from:", CONFIG.dataURL);
+    const response = await fetch(CONFIG.dataURL);
 
     if (!response.ok) {
+      console.error("Failed to fetch:", response.status, response.statusText);
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
-    console.log("Data received:", data);
+    console.log("Data successfully loaded:", data);
 
     // Process companies
     data.forEach((company, index) => {
@@ -543,7 +544,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error details:", error);
     document.getElementById(
       "companies"
     ).innerHTML = `<p class="error-message">Failed to load data: ${error.message}</p>`;
