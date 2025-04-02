@@ -7,7 +7,7 @@ const CONFIG = {
   },
   get dataURL() {
     return this.isProduction
-      ? "/Companies_and_candidates.json" // Updated production path
+      ? "/recruitmentportal/src/data/Companies_and_candidates.json" // Updated to match GitHub structure
       : "http://localhost:3000/data/Companies_and_candidates.json";
   },
 };

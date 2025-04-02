@@ -2,8 +2,8 @@
   "version": 2,
   "routes": [
     {
-      "src": "/Companies_and_candidates.json",
-      "dest": "/Companies_and_candidates.json"
+      "src": "/recruitmentportal/src/data/Companies_and_candidates.json",
+      "dest": "/src/data/Companies_and_candidates.json"
     },
     {
       "src": "/(.*)",
