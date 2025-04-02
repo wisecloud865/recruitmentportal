@@ -7,8 +7,8 @@ const CONFIG = {
   },
   get dataURL() {
     return this.isProduction
-      ? "/Companies_and_candidates.json" // Updated path for production
-      : "http://localhost:3000/data/Companies_and_candidates.json";
+      ? "/Companies_and_candidates.json" // Correct path for production
+      : "http://localhost:3000/Companies_and_candidates.json"; // Fixed path for local development
   },
 };
 
