@@ -1,13 +1,3 @@
-// Add this at the top of your file
-const CONFIG = {
-  isProduction: true, // Change to true when deploying
-  get baseURL() {
-    return this.isProduction
-      ? "https://wisecloud.se" // Remove /recruitmentportal/homepage-project-1 from here
-      : "http://localhost:3000";
-  },
-};
-
 // Helper function to show notifications
 function showNotification(message, isSuccess) {
   const notification = document.createElement("div");
@@ -27,20 +17,29 @@ document.addEventListener("DOMContentLoaded", async () => {
       throw new Error("Companies section not found!");
     }
 
+    // Update the section title creation with legend
+    companiesSection.innerHTML = `
+            <div class="title-section">
+                <h2 class="table-title">
+                    <i class="fas fa-building"></i> Companies and Candidates
+                </h2>
+                <div class="company-legend">
+                    <div class="legend-item">
+                        <span class="legend-dot pink"></span>
+                        <span class="legend-text">Recruitment Company</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot black"></span>
+                        <span class="legend-text">Consultant Company</span>
+                    </div>
+                </div>
+            </div>
+        `;
+
     const response = await fetch(
-      `${CONFIG.baseURL}/recruitmentportal/homepage-project-1/src/data/Companies_and_candidates.json`,
-      {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
+      `${CONFIG.baseURL}/data/Companies_and_candidates.json`
     );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const data = await response.json();
 
     // Process companies
@@ -278,10 +277,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
 
       // In your code where you create the candidates section, modify it like this:
-      if (
-        company.matched_candidates &&
-        Array.isArray(company.matched_candidates)
-      ) {
+      if (company.matched_candidates && company.matched_candidates.length > 0) {
         // Create a separate container for all candidates
         const candidatesWrapper = document.createElement("div");
         candidatesWrapper.className = "candidates-wrapper";
@@ -293,9 +289,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         candidatesHeading.className = "candidates-heading";
         candidatesWrapper.appendChild(candidatesHeading);
 
-        company.matched_candidates?.forEach((candidate, candidateIndex) => {
-          if (!candidate) return; // Skip if candidate is undefined
-
+        company.matched_candidates.forEach((candidate, candidateIndex) => {
           // Create individual candidate container
           const candidateContainer = document.createElement("div");
           candidateContainer.className = "candidate-container";
@@ -347,13 +341,13 @@ document.addEventListener("DOMContentLoaded", async () => {
               const response = await fetch(
                 `${CONFIG.baseURL}/deleteCandidate`,
                 {
-                  // Add full URL
+                  // Use CONFIG.baseURL
                   method: "DELETE",
                   headers: {
                     "Content-Type": "application/json",
                   },
                   body: JSON.stringify({
-                    companyIndex: companyIndex, // Make sure these values are defined
+                    companyIndex: index, // Make sure these values are defined
                     candidateIndex: candidateIndex,
                   }),
                 }
@@ -403,7 +397,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             { label: "Description", key: "description" },
             { label: "Resume", key: "resume" },
             { label: "Expected Salary", key: "expected_salary" },
-            { label: "Expected Cost", key: "expected_cost" }, // Make sure this line exists
+            { label: "Expected Cost", key: "expected_cost" },
           ];
 
           // Add default candidate information rows (first 6 rows)
@@ -549,8 +543,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
   } catch (error) {
-    console.error("Error loading data:", error);
-    showNotification("Failed to load company data", false);
+    console.error("Error:", error);
+    companiesSection.innerHTML =
+      '<p class="error-message">Failed to load data</p>';
   }
 });
 
@@ -943,83 +938,6 @@ function createEditableSalaryField(value, containerId) {
   `;
 }
 
-// Add this function to handle salary editing
-function setupSalaryEditor(
-  container,
-  originalValue,
-  candidate,
-  companyIndex,
-  candidateIndex
-) {
-  const editBtn = container.querySelector(".edit-btn");
-  const editForm = container.querySelector(".edit-form");
-  const input = container.querySelector("input");
-  const saveBtn = container.querySelector(".save-btn");
-  const cancelBtn = container.querySelector(".cancel-btn");
-  const displayValue = container.querySelector(".salary-value");
-
-  editBtn.addEventListener("click", () => {
-    editBtn.parentElement.classList.add("hidden");
-    editForm.classList.remove("hidden");
-    input.value = originalValue;
-    input.focus();
-  });
-
-  saveBtn.addEventListener("click", async () => {
-    const newValue = Number(input.value);
-    if (isNaN(newValue) || newValue < 0) {
-      alert("Please enter a valid salary amount");
-      return;
-    }
-
-    try {
-      const response = await fetch(`${CONFIG.baseURL}/updateField`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          companyIndex: companyIndex,
-          candidateIndex: candidateIndex,
-          fieldKey: "expected_salary",
-          value: newValue,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to save changes");
-      }
-
-      const result = await response.json();
-
-      if (result.success) {
-        displayValue.textContent = `${newValue.toLocaleString()}`;
-        editForm.classList.add("hidden");
-        editBtn.parentElement.classList.remove("hidden");
-
-        const successMsg = document.createElement("div");
-        successMsg.className = "success-message";
-        successMsg.textContent = "Salary updated successfully";
-        container.appendChild(successMsg);
-        setTimeout(() => successMsg.remove(), 2000);
-      } else {
-        throw new Error(result.error || "Failed to save changes");
-      }
-    } catch (error) {
-      console.error("Failed to save:", error);
-      alert("Failed to save changes");
-      input.value = originalValue;
-      displayValue.textContent = `${originalValue.toLocaleString()}`;
-    }
-  });
-
-  cancelBtn.addEventListener("click", () => {
-    input.value = originalValue;
-    editForm.classList.add("hidden");
-    editBtn.parentElement.classList.remove("hidden");
-  });
-}
-
 // Add this function near your other helper functions
 function createDeleteButton(candidateIndex) {
   return `
@@ -1083,7 +1001,7 @@ confirmDeleteBtn.addEventListener("click", async (e) => {
   e.stopPropagation();
   try {
     const response = await fetch(`${CONFIG.baseURL}/deleteCandidate`, {
-      // Add full URL
+      // Use CONFIG.baseURL
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -1142,83 +1060,4 @@ function createEditableCostField(value, containerId) {
             </div>
         </div>
     `;
-}
-
-function setupCostEditor(
-  container,
-  originalValue,
-  candidate,
-  companyIndex,
-  candidateIndex
-) {
-  const editBtn = container.querySelector(".edit-btn");
-  const editForm = container.querySelector(".edit-form");
-  const input = container.querySelector("input");
-  const saveBtn = container.querySelector(".save-btn");
-  const cancelBtn = container.querySelector(".cancel-btn");
-  const displayValue = container.querySelector(".cost-value");
-
-  editBtn.addEventListener("click", () => {
-    editBtn.parentElement.classList.add("hidden");
-    editForm.classList.remove("hidden");
-    input.value = originalValue;
-    input.focus();
-  });
-
-  saveBtn.addEventListener("click", async () => {
-    const newValue = Number(input.value);
-    if (isNaN(newValue) || newValue < 0) {
-      alert("Please enter a valid cost amount");
-      return;
-    }
-
-    try {
-      const response = await fetch(`${CONFIG.baseURL}/updateField`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          companyIndex: companyIndex,
-          candidateIndex: candidateIndex,
-          fieldKey: "expected_cost",
-          value: newValue,
-        }),
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text(); // Capture the error text
-        throw new Error(
-          `Failed to save changes: ${response.status} - ${errorText}`
-        ); // Include error text in the error message
-      }
-
-      const result = await response.json();
-
-      if (result.success) {
-        displayValue.textContent = `${newValue.toLocaleString()}`;
-        editForm.classList.add("hidden");
-        editBtn.parentElement.classList.remove("hidden");
-
-        const successMsg = document.createElement("div");
-        successMsg.className = "success-message";
-        successMsg.textContent = "Cost updated successfully";
-        container.appendChild(successMsg);
-        setTimeout(() => successMsg.remove(), 2000);
-      } else {
-        throw new Error(result.error || "Failed to save changes");
-      }
-    } catch (error) {
-      console.error("Failed to save:", error);
-      alert(`Failed to save changes: ${error.message}`); // Display the error message
-      input.value = originalValue;
-      displayValue.textContent = `${originalValue.toLocaleString()}`;
-    }
-  });
-
-  cancelBtn.addEventListener("click", () => {
-    input.value = originalValue;
-    editForm.classList.add("hidden");
-    editBtn.parentElement.classList.remove("hidden");
-  });
 }
