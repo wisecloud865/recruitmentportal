@@ -2,12 +2,12 @@ const CONFIG = {
   isProduction: window.location.hostname !== "localhost",
   get baseURL() {
     return this.isProduction
-      ? "" // Remove the prefix since we'll use absolute paths
+      ? "" // Empty for production since we're using absolute paths
       : "http://localhost:3000";
   },
   get dataURL() {
     return this.isProduction
-      ? "/src/data/Companies_and_candidates.json" // Simplified path
+      ? "/Companies_and_candidates.json" // Updated path for production
       : "http://localhost:3000/data/Companies_and_candidates.json";
   },
 };
