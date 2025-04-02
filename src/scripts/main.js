@@ -2,12 +2,12 @@ const CONFIG = {
   isProduction: window.location.hostname !== "localhost",
   get baseURL() {
     return this.isProduction
-      ? "/recruitmentportal/homepage-project-1"
+      ? "" // Remove the prefix since we'll use absolute paths
       : "http://localhost:3000";
   },
   get dataURL() {
     return this.isProduction
-      ? "/recruitmentportal/src/data/Companies_and_candidates.json" // Updated to match GitHub structure
+      ? "/src/data/Companies_and_candidates.json" // Simplified path
       : "http://localhost:3000/data/Companies_and_candidates.json";
   },
 };

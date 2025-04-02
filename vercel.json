@@ -2,12 +2,14 @@
   "version": 2,
   "routes": [
     {
-      "src": "/recruitmentportal/src/data/Companies_and_candidates.json",
+      "src": "/src/data/Companies_and_candidates.json",
       "dest": "/src/data/Companies_and_candidates.json"
-    },
+    }
+  ],
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "/recruitmentportal/homepage-project-1/$1"
+      "source": "/(.*)",
+      "destination": "/src/$1"
     }
   ]
 }
