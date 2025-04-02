@@ -1,28 +1,3 @@
-const CONFIG = {
-  isProduction: window.location.hostname !== "localhost",
-  get baseURL() {
-    return this.isProduction
-      ? "" // Empty for production since we're using absolute paths
-      : "http://localhost:3000";
-  },
-  get dataURL() {
-    return this.isProduction
-      ? "/Companies_and_candidates.json" // Correct path for production
-      : "http://localhost:3000/Companies_and_candidates.json"; // Fixed path for local development
-  },
-};
-
-// Helper function to show notifications
-function showNotification(message, isSuccess) {
-  const notification = document.createElement("div");
-  notification.className = `notification ${
-    isSuccess ? "success-notification" : "error-notification"
-  }`;
-  notification.textContent = message;
-  document.body.appendChild(notification);
-  setTimeout(() => notification.remove(), 3000);
-}
-
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     const companiesSection = document.getElementById("companies");
@@ -32,8 +7,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    console.log("Attempting to fetch from:", CONFIG.dataURL);
-    const response = await fetch(CONFIG.dataURL);
+    // Update the fetch to use the same relative path as other files
+    const response = await fetch("./data/Companies_and_candidates.json");
 
     if (!response.ok) {
       console.error("Failed to fetch:", response.status, response.statusText);
