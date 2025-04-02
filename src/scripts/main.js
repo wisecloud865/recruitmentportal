@@ -1,3 +1,12 @@
+const CONFIG = {
+  isProduction: window.location.hostname !== "localhost",
+  get baseURL() {
+    return this.isProduction
+      ? "/recruitmentportal/homepage-project-1"
+      : "http://localhost:3000";
+  },
+};
+
 // Helper function to show notifications
 function showNotification(message, isSuccess) {
   const notification = document.createElement("div");
@@ -14,33 +23,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     const companiesSection = document.getElementById("companies");
 
     if (!companiesSection) {
-      throw new Error("Companies section not found!");
+      console.error("Companies section not found in the DOM");
+      return;
     }
 
-    // Update the section title creation with legend
-    companiesSection.innerHTML = `
-            <div class="title-section">
-                <h2 class="table-title">
-                    <i class="fas fa-building"></i> Companies and Candidates
-                </h2>
-                <div class="company-legend">
-                    <div class="legend-item">
-                        <span class="legend-dot pink"></span>
-                        <span class="legend-text">Recruitment Company</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-dot black"></span>
-                        <span class="legend-text">Consultant Company</span>
-                    </div>
-                </div>
-            </div>
-        `;
-
+    console.log(
+      "Fetching data from:",
+      `${CONFIG.baseURL}/data/Companies_and_candidates.json`
+    );
     const response = await fetch(
       `${CONFIG.baseURL}/data/Companies_and_candidates.json`
     );
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     const data = await response.json();
+    console.log("Data received:", data);
 
     // Process companies
     data.forEach((company, index) => {
@@ -544,8 +544,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   } catch (error) {
     console.error("Error:", error);
-    companiesSection.innerHTML =
-      '<p class="error-message">Failed to load data</p>';
+    document.getElementById(
+      "companies"
+    ).innerHTML = `<p class="error-message">Failed to load data: ${error.message}</p>`;
   }
 });
 
@@ -957,83 +958,6 @@ function createDeleteButton(candidateIndex) {
         </div>
     `;
 }
-
-// Modify your candidate header creation in the main code where you create candidate containers
-const candidateContainer = document.createElement("div");
-candidateContainer.className = "candidate-container";
-
-// Create candidate header with delete button
-const candidateHeader = document.createElement("div");
-candidateHeader.className = "candidate-header";
-candidateHeader.innerHTML = `
-    <div class="candidate-header-content">
-        <div class="candidate-name">
-            <i class="fas fa-user"></i> ${
-              candidate.full_name || `Candidate ${candidateIndex + 1}`
-            }
-        </div>
-        ${createDeleteButton(candidateIndex)}
-    </div>
-`;
-
-// Insert the candidate header at the top of the container
-candidateContainer.appendChild(candidateHeader);
-
-// Add this after creating the candidate header
-const deleteBtn = candidateHeader.querySelector(".delete-btn");
-const deleteConfirmation = candidateHeader.querySelector(
-  ".delete-confirmation-overlay"
-);
-const confirmDeleteBtn = candidateHeader.querySelector(".confirm-delete");
-const cancelDeleteBtn = candidateHeader.querySelector(".cancel-delete");
-
-deleteBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  deleteConfirmation.classList.remove("hidden");
-});
-
-cancelDeleteBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  deleteConfirmation.classList.add("hidden");
-});
-
-confirmDeleteBtn.addEventListener("click", async (e) => {
-  e.stopPropagation();
-  try {
-    const response = await fetch(`${CONFIG.baseURL}/deleteCandidate`, {
-      // Use CONFIG.baseURL
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        companyIndex: index, // Make sure these values are defined
-        candidateIndex: candidateIndex,
-      }),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(
-        `HTTP error! status: ${response.status}, body: ${errorText}`
-      );
-    }
-
-    const result = await response.json();
-
-    if (result.success) {
-      showNotification("Candidate deleted successfully", true);
-      candidateContainer.remove();
-    } else {
-      throw new Error(result.error || "Failed to delete candidate");
-    }
-  } catch (error) {
-    console.error("Delete failed:", error);
-    showNotification(`Failed to delete candidate: ${error.message}`, false);
-  } finally {
-    deleteConfirmation.classList.add("hidden");
-  }
-});
 
 // Add this helper function for creating editable cost fields
 function createEditableCostField(value, containerId) {
