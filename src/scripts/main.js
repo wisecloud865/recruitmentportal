@@ -7,7 +7,7 @@ const CONFIG = {
   },
   get dataURL() {
     return this.isProduction
-      ? "/recruitmentportal/src/data/Companies_and_candidates.json" // Updated path
+      ? "/Companies_and_candidates.json" // Updated production path
       : "http://localhost:3000/data/Companies_and_candidates.json";
   },
 };
