@@ -314,20 +314,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             );
 
             try {
-              const response = await fetch(
-                `${CONFIG.baseURL}/deleteCandidate`,
-                {
-                  // Use CONFIG.baseURL
-                  method: "DELETE",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    companyIndex: index, // Make sure these values are defined
-                    candidateIndex: candidateIndex,
-                  }),
-                }
-              );
+              const response = await fetch("/deleteCandidate", {
+                method: "DELETE",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  companyIndex: index,
+                  candidateIndex: candidateIndex,
+                }),
+              });
 
               if (!response.ok) {
                 const errorText = await response.text();
@@ -668,7 +664,7 @@ function setupSalaryEditor(
     }
 
     try {
-      const response = await fetch(`${CONFIG.baseURL}/updateField`, {
+      const response = await fetch("/updateField", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
