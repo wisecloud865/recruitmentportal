@@ -961,3 +961,80 @@ function createEditableCostField(value, containerId) {
         </div>
     `;
 }
+
+// Add this function after setupSalaryEditor
+function setupCostEditor(
+  container,
+  originalValue,
+  candidate,
+  companyIndex,
+  candidateIndex
+) {
+  const editBtn = container.querySelector(".edit-btn");
+  const editForm = container.querySelector(".edit-form");
+  const input = container.querySelector("input");
+  const saveBtn = container.querySelector(".save-btn");
+  const cancelBtn = container.querySelector(".cancel-btn");
+  const displayValue = container.querySelector(".cost-value");
+
+  editBtn.addEventListener("click", () => {
+    editBtn.parentElement.classList.add("hidden");
+    editForm.classList.remove("hidden");
+    input.value = originalValue;
+    input.focus();
+  });
+
+  saveBtn.addEventListener("click", async () => {
+    const newValue = Number(input.value);
+    if (isNaN(newValue) || newValue < 0) {
+      alert("Please enter a valid cost amount");
+      return;
+    }
+
+    try {
+      const response = await fetch("/updateField", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          companyIndex: companyIndex,
+          candidateIndex: candidateIndex,
+          fieldKey: "expected_cost",
+          value: newValue,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save changes");
+      }
+
+      const result = await response.json();
+
+      if (result.success) {
+        displayValue.textContent = `${newValue.toLocaleString()}`;
+        editForm.classList.add("hidden");
+        editBtn.parentElement.classList.remove("hidden");
+
+        const successMsg = document.createElement("div");
+        successMsg.className = "success-message";
+        successMsg.textContent = "Cost updated successfully";
+        container.appendChild(successMsg);
+        setTimeout(() => successMsg.remove(), 2000);
+      } else {
+        throw new Error(result.error || "Failed to save changes");
+      }
+    } catch (error) {
+      console.error("Failed to save:", error);
+      alert("Failed to save changes");
+      input.value = originalValue;
+      displayValue.textContent = `${originalValue.toLocaleString()}`;
+    }
+  });
+
+  cancelBtn.addEventListener("click", () => {
+    input.value = originalValue;
+    editForm.classList.add("hidden");
+    editBtn.parentElement.classList.remove("hidden");
+  });
+}
