@@ -1,15 +1,9 @@
 {
   "version": 2,
-  "routes": [
-    {
-      "src": "/Companies_and_candidates.json",
-      "dest": "/Companies_and_candidates.json"
-    }
-  ],
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/src/$1"
+      "source": "/",
+      "destination": "/src/index.html"
     }
   ]
 }
