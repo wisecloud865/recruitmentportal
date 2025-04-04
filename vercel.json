@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "public": true,
   "routes": [
+    { "src": "/api/deleteCandidate", "dest": "/api/deleteCandidate.js" },
     {
       "src": "/scripts/(.*)\\.js",
       "dest": "/scripts/$1.js",
@@ -12,7 +12,7 @@
       "dest": "/styles/$1.css",
       "headers": { "Content-Type": "text/css" }
     },
-
+    { "src": "/favicon.ico", "dest": "/favicon.ico" },
     {
       "src": "/Companies_and_candidates\\.json",
       "dest": "/Companies_and_candidates.json",
@@ -23,5 +23,6 @@
       "dest": "/images/$1"
     },
     { "src": "/(.*)", "dest": "/index.html" }
-  ]
+  ],
+  "public": true
 }
