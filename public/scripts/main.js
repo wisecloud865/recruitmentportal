@@ -314,7 +314,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             );
 
             try {
-              const response = await fetch("/deleteCandidate", {
+              const response = await fetch("/api/deleteCandidate", {
                 method: "DELETE",
                 headers: {
                   "Content-Type": "application/json",
@@ -664,7 +664,7 @@ function setupSalaryEditor(
     }
 
     try {
-      const response = await fetch("/updateField", {
+      const response = await fetch("/api/updateField", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -737,7 +737,7 @@ function setupEditableField(
 
     if (validateInput(newValue, fieldType)) {
       try {
-        const response = await fetch(`${CONFIG.baseURL}/updateField`, {
+        const response = await fetch("/api/updateField", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -988,7 +988,7 @@ function setupCostEditor(
     }
 
     try {
-      const response = await fetch("/updateField", {
+      const response = await fetch("/api/updateField", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

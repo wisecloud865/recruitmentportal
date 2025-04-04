@@ -1,3 +1,9 @@
 {
-  "version": 2
+  "version": 2,
+  "routes": [
+    { "src": "/api/updateField", "dest": "/api/updateField.js" },
+    { "src": "/api/deleteCandidate", "dest": "/api/deleteCandidate.js" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ],
+  "public": true
 }
