@@ -1,6 +1,6 @@
-const { Octokit } = require("@octokit/rest");
+import { Octokit } from "@octokit/rest";
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method Not Allowed" });
   }
@@ -8,12 +8,10 @@ module.exports = async (req, res) => {
   try {
     const { companyIndex, candidateIndex, fieldKey, value } = req.body;
 
-    // Authenticate with GitHub API using a personal access token
     const octokit = new Octokit({
       auth: process.env.GITHUB_TOKEN,
     });
 
-    // Get the current content of the JSON file
     const { data: fileData } = await octokit.repos.getContent({
       owner: process.env.GITHUB_OWNER,
       repo: process.env.GITHUB_REPO,
@@ -23,7 +21,6 @@ module.exports = async (req, res) => {
     const content = Buffer.from(fileData.content, "base64").toString("utf-8");
     const data = JSON.parse(content);
 
-    // Update the data
     if (!data[companyIndex]) {
       throw new Error("Company not found");
     }
@@ -33,18 +30,14 @@ module.exports = async (req, res) => {
       data[companyIndex].matched_candidates &&
       data[companyIndex].matched_candidates[candidateIndex]
     ) {
-      // Update candidate-level field
       data[companyIndex].matched_candidates[candidateIndex][fieldKey] = value;
     } else {
-      // Update company-level field
       data[companyIndex][fieldKey] = value;
     }
 
-    // Convert the updated data back to JSON
     const updatedContent = JSON.stringify(data, null, 2);
     const updatedContentBase64 = Buffer.from(updatedContent).toString("base64");
 
-    // Update the file in the repository
     await octokit.repos.updateFile({
       owner: process.env.GITHUB_OWNER,
       repo: process.env.GITHUB_REPO,
@@ -61,4 +54,4 @@ module.exports = async (req, res) => {
     console.error("Error updating data:", error);
     res.status(500).json({ success: false, error: error.message });
   }
-};
+}
