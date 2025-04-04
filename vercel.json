@@ -1,17 +1,20 @@
 {
   "version": 2,
   "routes": [
+    {
+      "src": "/scripts/(.*)\\.js",
+      "dest": "/scripts/$1.js",
+      "headers": { "Content-Type": "application/javascript" }
+    },
+    {
+      "src": "/styles/(.*)\\.css",
+      "dest": "/styles/$1.css",
+      "headers": { "Content-Type": "text/css" }
+    },
     { "src": "/api/updateField", "dest": "/api/updateField.js" },
     { "src": "/api/deleteCandidate", "dest": "/api/deleteCandidate.js" },
+    { "src": "/favicon.ico", "dest": "/favicon.ico" },
     { "src": "/(.*)", "dest": "/index.html" }
   ],
-  "public": true,
-  "headers": [
-    {
-      "source": "/scripts/(.*)\\.js",
-      "headers": {
-        "Content-Type": "application/javascript"
-      }
-    }
-  ]
+  "public": true
 }
