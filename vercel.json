@@ -5,5 +5,13 @@
     { "src": "/api/deleteCandidate", "dest": "/api/deleteCandidate.js" },
     { "src": "/(.*)", "dest": "/index.html" }
   ],
-  "public": true
+  "public": true,
+  "headers": [
+    {
+      "source": "/scripts/(.*)\\.js",
+      "headers": {
+        "Content-Type": "application/javascript"
+      }
+    }
+  ]
 }
