@@ -1,6 +1,7 @@
 {
   "version": 2,
   "routes": [
+    { "src": "/api/updateData", "dest": "/api/updateData.js" },
     {
       "src": "/scripts/(.*)\\.js",
       "dest": "/scripts/$1.js",
@@ -11,8 +12,6 @@
       "dest": "/styles/$1.css",
       "headers": { "Content-Type": "text/css" }
     },
-    { "src": "/api/updateField", "dest": "/api/updateField.js" },
-    { "src": "/api/deleteCandidate", "dest": "/api/deleteCandidate.js" },
     { "src": "/favicon.ico", "dest": "/favicon.ico" },
     {
       "src": "/Companies_and_candidates\\.json",

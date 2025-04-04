@@ -664,7 +664,7 @@ function setupSalaryEditor(
     }
 
     try {
-      const response = await fetch("/api/updateField", {
+      const response = await fetch("/api/updateData", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -735,65 +735,61 @@ function setupEditableField(
   saveBtn.addEventListener("click", async () => {
     const newValue = input.value.trim();
 
-    if (validateInput(newValue, fieldType)) {
-      try {
-        const response = await fetch("/api/updateField", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            companyIndex: companyIndex,
-            fieldKey: fieldKey,
-            value: newValue,
-          }),
-        });
+    try {
+      const response = await fetch("/api/updateData", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          companyIndex: companyIndex,
+          fieldKey: fieldKey,
+          value: newValue,
+        }),
+      });
 
-        if (!response.ok) {
-          throw new Error("Failed to save changes");
-        }
+      if (!response.ok) {
+        throw new Error("Failed to save changes");
+      }
 
-        const result = await response.json();
+      const result = await response.json();
 
-        if (result.success) {
-          // Update the display
-          const emptyField = container.querySelector(".empty-field");
-          if (emptyField) {
-            if (fieldType === "phone") {
-              emptyField.outerHTML = `
+      if (result.success) {
+        // Update the display
+        const emptyField = container.querySelector(".empty-field");
+        if (emptyField) {
+          if (fieldType === "phone") {
+            emptyField.outerHTML = `
                 <a href="tel:${newValue}" class="link phone-link">
                     <i class="fas fa-phone"></i> ${newValue}
                 </a>`;
-            } else if (fieldType === "email") {
-              emptyField.outerHTML = `
+          } else if (fieldType === "email") {
+            emptyField.outerHTML = `
                 <a href="mailto:${newValue}" class="link email-link">
                     <i class="fas fa-envelope"></i> ${newValue}
                 </a>`;
-            }
           }
-
-          company[fieldKey] = newValue;
-          editForm.classList.add("hidden");
-          editBtn.classList.add("hidden");
-
-          const successMsg = document.createElement("div");
-          successMsg.className = "success-message";
-          successMsg.textContent = `${fieldType} added successfully!`;
-          container.appendChild(successMsg);
-          setTimeout(() => successMsg.remove(), 2000);
-        } else {
-          throw new Error(result.error || "Failed to save changes");
         }
-      } catch (error) {
-        console.error("Error:", error);
-        const errorMsg = document.createElement("div");
-        errorMsg.className = "error-message";
-        errorMsg.textContent = `Failed to save ${fieldType}`;
-        container.appendChild(errorMsg);
-        setTimeout(() => errorMsg.remove(), 2000);
+
+        company[fieldKey] = newValue;
+        editForm.classList.add("hidden");
+        editBtn.classList.add("hidden");
+
+        const successMsg = document.createElement("div");
+        successMsg.className = "success-message";
+        successMsg.textContent = `${fieldType} added successfully!`;
+        container.appendChild(successMsg);
+        setTimeout(() => successMsg.remove(), 2000);
+      } else {
+        throw new Error(result.error || "Failed to save changes");
       }
-    } else {
-      alert(`Please enter a valid ${fieldType}`);
+    } catch (error) {
+      console.error("Error:", error);
+      const errorMsg = document.createElement("div");
+      errorMsg.className = "error-message";
+      errorMsg.textContent = `Failed to save ${fieldType}`;
+      container.appendChild(errorMsg);
+      setTimeout(() => errorMsg.remove(), 2000);
     }
   });
 
@@ -801,6 +797,82 @@ function setupEditableField(
     input.value = "";
     editForm.classList.add("hidden");
     editBtn.classList.remove("hidden");
+  });
+}
+
+function setupCostEditor(
+  container,
+  originalValue,
+  candidate,
+  companyIndex,
+  candidateIndex
+) {
+  const editBtn = container.querySelector(".edit-btn");
+  const editForm = container.querySelector(".edit-form");
+  const input = container.querySelector("input");
+  const saveBtn = container.querySelector(".save-btn");
+  const cancelBtn = container.querySelector(".cancel-btn");
+  const displayValue = container.querySelector(".cost-value");
+
+  editBtn.addEventListener("click", () => {
+    editBtn.parentElement.classList.add("hidden");
+    editForm.classList.remove("hidden");
+    input.value = originalValue;
+    input.focus();
+  });
+
+  saveBtn.addEventListener("click", async () => {
+    const newValue = Number(input.value);
+    if (isNaN(newValue) || newValue < 0) {
+      alert("Please enter a valid cost amount");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/updateData", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          companyIndex: companyIndex,
+          candidateIndex: candidateIndex,
+          fieldKey: "expected_cost",
+          value: newValue,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save changes");
+      }
+
+      const result = await response.json();
+
+      if (result.success) {
+        displayValue.textContent = `${newValue.toLocaleString()}`;
+        editForm.classList.add("hidden");
+        editBtn.parentElement.classList.remove("hidden");
+
+        const successMsg = document.createElement("div");
+        successMsg.className = "success-message";
+        successMsg.textContent = "Cost updated successfully";
+        container.appendChild(successMsg);
+        setTimeout(() => successMsg.remove(), 2000);
+      } else {
+        throw new Error(result.error || "Failed to save changes");
+      }
+    } catch (error) {
+      console.error("Failed to save:", error);
+      alert("Failed to save changes");
+      input.value = originalValue;
+      displayValue.textContent = `${originalValue.toLocaleString()}`;
+    }
+  });
+
+  cancelBtn.addEventListener("click", () => {
+    input.value = originalValue;
+    editForm.classList.add("hidden");
+    editBtn.parentElement.classList.remove("hidden");
   });
 }
 
@@ -956,81 +1028,4 @@ function createEditableCostField(value, containerId) {
             </div>
         </div>
     `;
-}
-
-// Add this function after setupSalaryEditor
-function setupCostEditor(
-  container,
-  originalValue,
-  candidate,
-  companyIndex,
-  candidateIndex
-) {
-  const editBtn = container.querySelector(".edit-btn");
-  const editForm = container.querySelector(".edit-form");
-  const input = container.querySelector("input");
-  const saveBtn = container.querySelector(".save-btn");
-  const cancelBtn = container.querySelector(".cancel-btn");
-  const displayValue = container.querySelector(".cost-value");
-
-  editBtn.addEventListener("click", () => {
-    editBtn.parentElement.classList.add("hidden");
-    editForm.classList.remove("hidden");
-    input.value = originalValue;
-    input.focus();
-  });
-
-  saveBtn.addEventListener("click", async () => {
-    const newValue = Number(input.value);
-    if (isNaN(newValue) || newValue < 0) {
-      alert("Please enter a valid cost amount");
-      return;
-    }
-
-    try {
-      const response = await fetch("/api/updateField", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          companyIndex: companyIndex,
-          candidateIndex: candidateIndex,
-          fieldKey: "expected_cost",
-          value: newValue,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to save changes");
-      }
-
-      const result = await response.json();
-
-      if (result.success) {
-        displayValue.textContent = `${newValue.toLocaleString()}`;
-        editForm.classList.add("hidden");
-        editBtn.parentElement.classList.remove("hidden");
-
-        const successMsg = document.createElement("div");
-        successMsg.className = "success-message";
-        successMsg.textContent = "Cost updated successfully";
-        container.appendChild(successMsg);
-        setTimeout(() => successMsg.remove(), 2000);
-      } else {
-        throw new Error(result.error || "Failed to save changes");
-      }
-    } catch (error) {
-      console.error("Failed to save:", error);
-      alert("Failed to save changes");
-      input.value = originalValue;
-      displayValue.textContent = `${originalValue.toLocaleString()}`;
-    }
-  });
-
-  cancelBtn.addEventListener("click", () => {
-    input.value = originalValue;
-    editForm.classList.add("hidden");
-    editBtn.parentElement.classList.remove("hidden");
-  });
 }
