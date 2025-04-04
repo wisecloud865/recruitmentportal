@@ -2,6 +2,7 @@
   "version": 2,
   "routes": [
     { "src": "/api/updateData", "dest": "/api/updateData.js" },
+    { "src": "/api/deleteCandidate", "dest": "/api/deleteCandidate.js" },
     {
       "src": "/scripts/(.*)\\.js",
       "dest": "/scripts/$1.js",
