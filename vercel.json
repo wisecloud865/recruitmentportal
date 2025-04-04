@@ -1,8 +1,7 @@
 {
   "version": 2,
+  "public": true,
   "routes": [
-    { "src": "/api/updateData", "dest": "/api/updateData.js" },
-    { "src": "/api/deleteCandidate", "dest": "/api/deleteCandidate.js" },
     {
       "src": "/scripts/(.*)\\.js",
       "dest": "/scripts/$1.js",
@@ -24,6 +23,5 @@
       "dest": "/images/$1"
     },
     { "src": "/(.*)", "dest": "/index.html" }
-  ],
-  "public": true
+  ]
 }
