@@ -22,7 +22,10 @@
       "src": "/images/(.*)",
       "dest": "/images/$1"
     },
-    { "src": "/(.*)", "dest": "/index.html" }
+    {
+      "src": "/(?!api)(.*)",
+      "dest": "/index.html"
+    }
   ],
   "public": true
 }
