@@ -664,27 +664,31 @@ function setupSalaryEditor(
     }
 
     try {
+      console.log("Sending update request:", {
+        companyIndex,
+        candidateIndex,
+        fieldKey: "expected_salary",
+        value: newValue,
+      });
+
       const response = await fetch("/api/updateData", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          companyIndex: companyIndex,
-          candidateIndex: candidateIndex,
+          companyIndex,
+          candidateIndex,
           fieldKey: "expected_salary",
           value: newValue,
         }),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to save changes");
-      }
-
       const result = await response.json();
+      console.log("Update response:", result);
 
       if (result.success) {
-        displayValue.textContent = `${newValue.toLocaleString()}`;
+        displayValue.textContent = newValue.toLocaleString();
         editForm.classList.add("hidden");
         editBtn.parentElement.classList.remove("hidden");
 
@@ -698,9 +702,7 @@ function setupSalaryEditor(
       }
     } catch (error) {
       console.error("Failed to save:", error);
-      alert("Failed to save changes");
-      input.value = originalValue;
-      displayValue.textContent = `${originalValue.toLocaleString()}`;
+      alert("Failed to save changes: " + error.message);
     }
   });
 
