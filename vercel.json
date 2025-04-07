@@ -1,30 +1,21 @@
 {
   "version": 2,
-  "rewrites": [{ "source": "/api/:path*", "destination": "/pages/api/:path*" }],
-  "routes": [
-    { "src": "/api/updateData", "dest": "/pages/api/updateData.js" },
-    { "src": "/api/deleteCandidate", "dest": "/pages/api/deleteCandidate.js" },
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/pages/api/:path*" },
+    { "source": "/api/updateData", "destination": "/pages/api/updateData.js" },
     {
-      "src": "/scripts/(.*)\\.js",
-      "dest": "/scripts/$1.js",
-      "headers": { "Content-Type": "application/javascript" }
+      "source": "/api/deleteCandidate",
+      "destination": "/pages/api/deleteCandidate.js"
     },
+    { "source": "/scripts/(.*)\\.js", "destination": "/scripts/$1.js" },
+    { "source": "/styles/(.*)\\.css", "destination": "/styles/$1.css" },
+    { "source": "/favicon.ico", "destination": "/favicon.ico" },
     {
-      "src": "/styles/(.*)\\.css",
-      "dest": "/styles/$1.css",
-      "headers": { "Content-Type": "text/css" }
+      "source": "/Companies_and_candidates\\.json",
+      "destination": "/Companies_and_candidates.json"
     },
-    { "src": "/favicon.ico", "dest": "/favicon.ico" },
-    {
-      "src": "/Companies_and_candidates\\.json",
-      "dest": "/Companies_and_candidates.json",
-      "headers": { "Content-Type": "application/json" }
-    },
-    {
-      "src": "/images/(.*)",
-      "dest": "/images/$1"
-    },
-    { "src": "/(.*)", "dest": "/index.html" }
+    { "source": "/images/(.*)", "destination": "/images/$1" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
   "public": true
 }
