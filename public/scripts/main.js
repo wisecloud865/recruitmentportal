@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // Update the fetch to use the same relative path as other files
-    const response = await fetch("/Companies_and_candidates.json");
+    // Update the fetch to use the API endpoint instead of static file
+    const response = await fetch("/api/getData");
 
     if (!response.ok) {
       console.error("Failed to fetch:", response.status, response.statusText);
