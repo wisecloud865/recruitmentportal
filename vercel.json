@@ -8,6 +8,7 @@
       "source": "/Companies_and_candidates\\.json",
       "destination": "/Companies_and_candidates.json"
     },
-    { "source": "/images/(.*)", "destination": "/images/$1" }
+    { "source": "/images/(.*)", "destination": "/images/$1" },
+    { "source": "/api/(.*)", "destination": "/pages/api/$1" } // Add this line for API routes
   ]
 }
