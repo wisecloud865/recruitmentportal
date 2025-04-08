@@ -60,107 +60,51 @@ document.addEventListener("DOMContentLoaded", async () => {
                         </td>
                     `;
         } else if (field.key.toLowerCase().includes("email")) {
-          const containerId = `email-container-${field.key}-${index}`;
-          const isNA = !value || value === "N/A";
-          const isEditable = isNA; // Only editable if empty/N/A
-
+          const containerId = `email-${field.key}-${index}`;
           row.innerHTML = `
-                        <td class="info-label">${field.label}</td>
-                        <td class="info-value">
-                            <div class="editable-field" id="${containerId}">
-                                ${
-                                  isNA
-                                    ? `<span class="empty-field">No email provided</span>`
-                                    : `<a href="mailto:${value}" class="link email-link">
-                                        <i class="fas fa-envelope"></i> ${value}
-                                    </a>`
-                                }
-                                ${
-                                  isEditable
-                                    ? `<button class="edit-btn" title="Add email">
-                                        <i class="fas fa-plus"></i> Add Email
-                                    </button>
-                                    <div class="edit-form hidden">
-                                        <input type="email" value="" placeholder="Enter email address">
-                                        <div class="button-group">
-                                            <button class="save-btn"><i class="fas fa-check"></i></button>
-                                            <button class="cancel-btn"><i class="fas fa-times"></i></button>
-                                        </div>
-                                    </div>`
-                                    : `<span class="uneditable-email">
-                                        <i class="fas fa-lock"></i> Email cannot be edited
-                                    </span>`
-                                }
-                            </div>
-                        </td>
-                    `;
+            <td class="info-label">${field.label}</td>
+            <td class="info-value">${createEditableEmailField(
+              value,
+              containerId
+            )}</td>
+          `;
 
-          if (isEditable) {
-            setTimeout(() => {
-              const container = document.getElementById(containerId);
-              if (container) {
-                setupEditableField(
-                  container,
-                  value,
-                  field.key,
-                  "email",
-                  company,
-                  index
-                );
-              }
-            }, 0);
-          }
+          setTimeout(() => {
+            const container = document.getElementById(containerId);
+            if (container) {
+              setupEditableField(
+                container,
+                value,
+                field.key,
+                "email",
+                company,
+                index
+              );
+            }
+          }, 0);
         } else if (field.key.toLowerCase().includes("telefon")) {
-          const containerId = `phone-container-${field.key}-${index}`;
-          const isNA = !value || value === "N/A" || value === "none";
-          const isEditable = isNA; // Only editable if empty/N/A/none
-
+          const containerId = `phone-${field.key}-${index}`;
           row.innerHTML = `
-                        <td class="info-label">${field.label}</td>
-                        <td class="info-value">
-                            <div class="editable-field" id="${containerId}">
-                                ${
-                                  isNA
-                                    ? `<span class="empty-field">No phone number provided</span>`
-                                    : `<a href="tel:${value}" class="link phone-link">
-                                        <i class="fas fa-phone"></i> ${value}
-                                    </a>`
-                                }
-                                ${
-                                  isEditable
-                                    ? `<button class="edit-btn" title="Add phone number">
-                                        <i class="fas fa-plus"></i> Add Phone
-                                    </button>
-                                    <div class="edit-form hidden">
-                                        <input type="tel" value="" placeholder="Enter phone number">
-                                        <div class="button-group">
-                                            <button class="save-btn"><i class="fas fa-check"></i></button>
-                                            <button class="cancel-btn"><i class="fas fa-times"></i></button>
-                                        </div>
-                                    </div>`
-                                    : `<span class="uneditable-phone">
-                                        <i class="fas fa-lock"></i> Phone cannot be edited
-                                    </span>`
-                                }
-                            </div>
-                        </td>
-                    `;
+            <td class="info-label">${field.label}</td>
+            <td class="info-value">${createEditablePhoneField(
+              value,
+              containerId
+            )}</td>
+          `;
 
-          if (isEditable) {
-            setTimeout(() => {
-              const container = document.getElementById(containerId);
-              if (container) {
-                setupEditableField(
-                  container,
-                  value,
-                  field.key,
-                  "phone",
-                  company,
-                  index
-                );
-              }
-            }, 0);
-          }
+          setTimeout(() => {
+            const container = document.getElementById(containerId);
+            if (container) {
+              setupEditableField(
+                container,
+                value,
+                field.key,
+                "phone",
+                company,
+                index
+              );
+            }
+          }, 0);
         } else {
           // Handle other fields normally
           row.innerHTML = `
@@ -726,9 +670,10 @@ function setupEditableField(
   const input = container.querySelector("input");
   const saveBtn = container.querySelector(".save-btn");
   const cancelBtn = container.querySelector(".cancel-btn");
+  const displayValue = container.querySelector(".display-value");
 
   editBtn.addEventListener("click", () => {
-    editBtn.classList.add("hidden");
+    editBtn.parentElement.classList.add("hidden");
     editForm.classList.remove("hidden");
     input.value = originalValue === "N/A" ? "" : originalValue;
     input.focus();
@@ -757,29 +702,33 @@ function setupEditableField(
       const result = await response.json();
 
       if (result.success) {
-        // Update the display
-        const emptyField = container.querySelector(".empty-field");
-        if (emptyField) {
-          if (fieldType === "phone") {
-            emptyField.outerHTML = `
-                <a href="tel:${newValue}" class="link phone-link">
-                    <i class="fas fa-phone"></i> ${newValue}
-                </a>`;
-          } else if (fieldType === "email") {
-            emptyField.outerHTML = `
-                <a href="mailto:${newValue}" class="link email-link">
-                    <i class="fas fa-envelope"></i> ${newValue}
-                </a>`;
-          }
+        if (fieldType === "phone") {
+          displayValue.innerHTML = `
+            <a href="tel:${newValue}" class="link phone-link">
+              <i class="fas fa-phone"></i> ${newValue}
+            </a>
+            <button class="edit-btn" title="Edit phone">
+              <i class="fas fa-edit"></i> Edit
+            </button>
+          `;
+        } else if (fieldType === "email") {
+          displayValue.innerHTML = `
+            <a href="mailto:${newValue}" class="link email-link">
+              <i class="fas fa-envelope"></i> ${newValue}
+            </a>
+            <button class="edit-btn" title="Edit email">
+              <i class="fas fa-edit"></i> Edit
+            </button>
+          `;
         }
 
         company[fieldKey] = newValue;
         editForm.classList.add("hidden");
-        editBtn.classList.add("hidden");
+        displayValue.classList.remove("hidden");
 
         const successMsg = document.createElement("div");
         successMsg.className = "success-message";
-        successMsg.textContent = `${fieldType} added successfully!`;
+        successMsg.textContent = `${fieldType} updated successfully!`;
         container.appendChild(successMsg);
         setTimeout(() => successMsg.remove(), 2000);
       } else {
@@ -796,9 +745,9 @@ function setupEditableField(
   });
 
   cancelBtn.addEventListener("click", () => {
-    input.value = "";
+    input.value = originalValue === "N/A" ? "" : originalValue;
     editForm.classList.add("hidden");
-    editBtn.classList.remove("hidden");
+    displayValue.classList.remove("hidden");
   });
 }
 
@@ -1030,4 +979,68 @@ function createEditableCostField(value, containerId) {
             </div>
         </div>
     `;
+}
+
+function createEditableEmailField(value, containerId) {
+  return `
+    <div id="${containerId}" class="editable-field">
+      <div class="display-value">
+        ${
+          value === "N/A" || !value
+            ? '<span class="empty-field">No email provided</span>'
+            : `<a href="mailto:${value}" class="link email-link">
+            <i class="fas fa-envelope"></i> ${value}
+           </a>`
+        }
+        <button class="edit-btn" title="Edit email">
+          <i class="fas fa-edit"></i> Edit
+        </button>
+      </div>
+      <div class="edit-form hidden">
+        <input type="email" value="${
+          value === "N/A" ? "" : value
+        }" placeholder="Enter email address">
+        <div class="button-group">
+          <button class="save-btn" title="Save changes">
+            <i class="fas fa-check"></i> Save
+          </button>
+          <button class="cancel-btn" title="Cancel">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function createEditablePhoneField(value, containerId) {
+  return `
+    <div id="${containerId}" class="editable-field">
+      <div class="display-value">
+        ${
+          value === "N/A" || !value
+            ? '<span class="empty-field">No phone number provided</span>'
+            : `<a href="tel:${value}" class="link phone-link">
+            <i class="fas fa-phone"></i> ${value}
+           </a>`
+        }
+        <button class="edit-btn" title="Edit phone">
+          <i class="fas fa-edit"></i> Edit
+        </button>
+      </div>
+      <div class="edit-form hidden">
+        <input type="tel" value="${
+          value === "N/A" ? "" : value
+        }" placeholder="Enter phone number">
+        <div class="button-group">
+          <button class="save-btn" title="Save changes">
+            <i class="fas fa-check"></i> Save
+          </button>
+          <button class="cancel-btn" title="Cancel">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
 }
