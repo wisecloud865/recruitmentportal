@@ -32,12 +32,15 @@ export default async function handler(req, res) {
     // Log the raw request body for debugging
     console.log("Raw request body:", req.body);
 
-    // Add environment variables logging
-    console.log("Environment check:", {
+    // Enhanced environment logging
+    const envCheck = {
       hasToken: !!process.env.GITHUB_TOKEN,
+      tokenPrefix: process.env.GITHUB_TOKEN?.substring(0, 4) || "none",
       owner: process.env.GITHUB_OWNER,
       repo: process.env.GITHUB_REPO,
-    });
+      nodeEnv: process.env.NODE_ENV,
+    };
+    console.log("Environment variables:", envCheck);
 
     // Validate request body
     if (!req.body || typeof req.body !== "object") {
@@ -58,10 +61,31 @@ export default async function handler(req, res) {
       value,
     });
 
-    // Initialize Octokit with GitHub token
+    // Initialize Octokit with debug logging
     const octokit = new Octokit({
       auth: process.env.GITHUB_TOKEN,
+      log: {
+        debug: (msg) => console.log("Octokit Debug:", msg),
+        info: (msg) => console.log("Octokit Info:", msg),
+        warn: (msg) => console.warn("Octokit Warn:", msg),
+        error: (msg) => console.error("Octokit Error:", msg),
+      },
     });
+
+    // Test repository access first
+    try {
+      const { data: repo } = await octokit.repos.get({
+        owner: process.env.GITHUB_OWNER,
+        repo: process.env.GITHUB_REPO,
+      });
+      console.log("Repository access successful:", {
+        fullName: repo.full_name,
+        defaultBranch: repo.default_branch,
+      });
+    } catch (repoError) {
+      console.error("Repository access failed:", repoError);
+      throw new Error(`Repository access failed: ${repoError.message}`);
+    }
 
     // Log GitHub API request details
     console.log("GitHub API request:", {
@@ -123,19 +147,23 @@ export default async function handler(req, res) {
       throw new Error(`GitHub API Error: ${githubError.message}`);
     }
   } catch (error) {
-    console.error("API Error:", error);
+    console.error("Detailed error:", {
+      message: error.message,
+      type: error.constructor.name,
+      status: error.status,
+      response: error.response?.data,
+    });
+
     res.status(500).json({
       success: false,
       error: error.message,
-      details:
-        process.env.NODE_ENV === "development"
-          ? {
-              stack: error.stack,
-              githubOwner: process.env.GITHUB_OWNER,
-              githubRepo: process.env.GITHUB_REPO,
-              hasToken: !!process.env.GITHUB_TOKEN,
-            }
-          : undefined,
+      details: {
+        owner: process.env.GITHUB_OWNER,
+        repo: process.env.GITHUB_REPO,
+        hasToken: !!process.env.GITHUB_TOKEN,
+        tokenPrefix: process.env.GITHUB_TOKEN?.substring(0, 4) || "none",
+        path: "public/Companies_and_candidates.json",
+      },
     });
   }
 }
