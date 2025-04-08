@@ -1,14 +1,19 @@
 {
   "version": 2,
-  "rewrites": [
-    { "source": "/scripts/(.*)\\.js", "destination": "/scripts/$1.js" },
-    { "source": "/styles/(.*)\\.css", "destination": "/styles/$1.css" },
-    { "source": "/favicon.ico", "destination": "/favicon.ico" },
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "pages/api/**/*.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/pages/api/$1.js" },
+    { "src": "/scripts/(.*)\\.js", "dest": "/scripts/$1.js" },
+    { "src": "/styles/(.*)\\.css", "dest": "/styles/$1.css" },
+    { "src": "/favicon.ico", "dest": "/favicon.ico" },
     {
-      "source": "/Companies_and_candidates\\.json",
-      "destination": "/Companies_and_candidates.json"
+      "src": "/Companies_and_candidates\\.json",
+      "dest": "/Companies_and_candidates.json"
     },
-    { "source": "/images/(.*)", "destination": "/images/$1" },
-    { "source": "/api/(.*)", "destination": "/pages/api/$1" } // Add this line for API routes
+    { "src": "/images/(.*)", "dest": "/images/$1" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
