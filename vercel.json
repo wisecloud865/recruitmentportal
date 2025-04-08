@@ -1,12 +1,6 @@
 {
   "version": 2,
   "rewrites": [
-    { "source": "/api/:path*", "destination": "/pages/api/:path*" },
-    { "source": "/api/updateData", "destination": "/pages/api/updateData.js" },
-    {
-      "source": "/api/deleteCandidate",
-      "destination": "/pages/api/deleteCandidate.js"
-    },
     { "source": "/scripts/(.*)\\.js", "destination": "/scripts/$1.js" },
     { "source": "/styles/(.*)\\.css", "destination": "/styles/$1.css" },
     { "source": "/favicon.ico", "destination": "/favicon.ico" },
@@ -14,8 +8,7 @@
       "source": "/Companies_and_candidates\\.json",
       "destination": "/Companies_and_candidates.json"
     },
-    { "source": "/images/(.*)", "destination": "/images/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/images/(.*)", "destination": "/images/$1" }
   ],
   "public": true
 }
