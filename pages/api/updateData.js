@@ -1,6 +1,7 @@
-import { Octokit } from "@octokit/rest";
-
 export default async function handler(req, res) {
+  // Dynamically import Octokit
+  const { Octokit } = await import("@octokit/rest");
+
   // Add CORS headers
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -17,7 +18,6 @@ export default async function handler(req, res) {
   if (req.method === "OPTIONS") {
     res.status(200).end();
     return;
-    recruitmentportal;
   }
 
   // Verify request method
@@ -86,7 +86,7 @@ export default async function handler(req, res) {
       data[companyIndex][fieldKey] = value;
     }
 
-    // Update the file
+    // Update the file on GitHub
     await octokit.repos.createOrUpdateFileContents({
       owner: process.env.GITHUB_OWNER,
       repo: process.env.GITHUB_REPO,
