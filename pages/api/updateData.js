@@ -32,6 +32,13 @@ export default async function handler(req, res) {
     // Log the raw request body for debugging
     console.log("Raw request body:", req.body);
 
+    // Add environment variables logging
+    console.log("Environment check:", {
+      hasToken: !!process.env.GITHUB_TOKEN,
+      owner: process.env.GITHUB_OWNER,
+      repo: process.env.GITHUB_REPO,
+    });
+
     // Validate request body
     if (!req.body || typeof req.body !== "object") {
       throw new Error("Invalid request body");
@@ -56,57 +63,79 @@ export default async function handler(req, res) {
       auth: process.env.GITHUB_TOKEN,
     });
 
-    // Get current file content
-    const { data: fileData } = await octokit.repos.getContent({
+    // Log GitHub API request details
+    console.log("GitHub API request:", {
       owner: process.env.GITHUB_OWNER,
       repo: process.env.GITHUB_REPO,
       path: "public/Companies_and_candidates.json",
     });
 
-    // Parse the content
-    const content = Buffer.from(fileData.content, "base64").toString();
-    let data;
     try {
-      data = JSON.parse(content);
-    } catch (parseError) {
-      console.error("JSON parse error:", parseError);
-      throw new Error("Failed to parse JSON data");
-    }
+      // Get current file content
+      const { data: fileData } = await octokit.repos.getContent({
+        owner: process.env.GITHUB_OWNER,
+        repo: process.env.GITHUB_REPO,
+        path: "public/Companies_and_candidates.json",
+        ref: "main", // Add specific branch
+      });
 
-    // Update the data
-    if (candidateIndex !== undefined) {
-      if (!data[companyIndex]?.matched_candidates?.[candidateIndex]) {
-        throw new Error("Candidate not found");
+      // Parse the content
+      const content = Buffer.from(fileData.content, "base64").toString();
+      let data;
+      try {
+        data = JSON.parse(content);
+      } catch (parseError) {
+        console.error("JSON parse error:", parseError);
+        throw new Error("Failed to parse JSON data");
       }
-      data[companyIndex].matched_candidates[candidateIndex][fieldKey] = value;
-    } else {
-      if (!data[companyIndex]) {
-        throw new Error("Company not found");
+
+      // Update the data
+      if (candidateIndex !== undefined) {
+        if (!data[companyIndex]?.matched_candidates?.[candidateIndex]) {
+          throw new Error("Candidate not found");
+        }
+        data[companyIndex].matched_candidates[candidateIndex][fieldKey] = value;
+      } else {
+        if (!data[companyIndex]) {
+          throw new Error("Company not found");
+        }
+        data[companyIndex][fieldKey] = value;
       }
-      data[companyIndex][fieldKey] = value;
+
+      // Update the file on GitHub with more specific error handling
+      await octokit.repos.createOrUpdateFileContents({
+        owner: process.env.GITHUB_OWNER,
+        repo: process.env.GITHUB_REPO,
+        path: "public/Companies_and_candidates.json",
+        message: `Update ${fieldKey} for company ${companyIndex}`,
+        content: Buffer.from(JSON.stringify(data, null, 2)).toString("base64"),
+        sha: fileData.sha,
+        branch: "main", // Add specific branch
+      });
+
+      // Send success response
+      res.status(200).json({
+        success: true,
+        message: "Data updated successfully",
+      });
+    } catch (githubError) {
+      console.error("GitHub API Error:", githubError);
+      throw new Error(`GitHub API Error: ${githubError.message}`);
     }
-
-    // Update the file on GitHub
-    await octokit.repos.createOrUpdateFileContents({
-      owner: process.env.GITHUB_OWNER,
-      repo: process.env.GITHUB_REPO,
-      path: "public/Companies_and_candidates.json",
-      message: `Update ${fieldKey}`,
-      content: Buffer.from(JSON.stringify(data, null, 2)).toString("base64"),
-      sha: fileData.sha,
-    });
-
-    // Send success response
-    res.status(200).json({
-      success: true,
-      message: "Data updated successfully",
-    });
   } catch (error) {
     console.error("API Error:", error);
     res.status(500).json({
       success: false,
       error: error.message,
-      stack: process.env.NODE_ENV === "development" ? error.stack : undefined,
+      details:
+        process.env.NODE_ENV === "development"
+          ? {
+              stack: error.stack,
+              githubOwner: process.env.GITHUB_OWNER,
+              githubRepo: process.env.GITHUB_REPO,
+              hasToken: !!process.env.GITHUB_TOKEN,
+            }
+          : undefined,
     });
   }
 }
