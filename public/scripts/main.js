@@ -989,22 +989,22 @@ function createEditableEmailField(value, containerId) {
           value === "N/A" || !value
             ? '<span class="empty-field">No email provided</span>'
             : `<a href="mailto:${value}" class="link email-link">
-            <i class="fas fa-envelope"></i> ${value}
-           </a>`
+              <i class="fas fa-envelope"></i> ${value}
+             </a>`
         }
         <button class="edit-btn" title="Edit email">
           <i class="fas fa-edit"></i> Edit
         </button>
       </div>
       <div class="edit-form hidden">
-        <input type="email" value="${
+        <input type="email" class="form-input" value="${
           value === "N/A" ? "" : value
         }" placeholder="Enter email address">
         <div class="button-group">
-          <button class="save-btn" title="Save changes">
+          <button class="save-btn">
             <i class="fas fa-check"></i> Save
           </button>
-          <button class="cancel-btn" title="Cancel">
+          <button class="cancel-btn">
             <i class="fas fa-times"></i> Cancel
           </button>
         </div>
@@ -1021,22 +1021,22 @@ function createEditablePhoneField(value, containerId) {
           value === "N/A" || !value
             ? '<span class="empty-field">No phone number provided</span>'
             : `<a href="tel:${value}" class="link phone-link">
-            <i class="fas fa-phone"></i> ${value}
-           </a>`
+              <i class="fas fa-phone"></i> ${value}
+             </a>`
         }
         <button class="edit-btn" title="Edit phone">
           <i class="fas fa-edit"></i> Edit
         </button>
       </div>
       <div class="edit-form hidden">
-        <input type="tel" value="${
+        <input type="tel" class="form-input" value="${
           value === "N/A" ? "" : value
         }" placeholder="Enter phone number">
         <div class="button-group">
-          <button class="save-btn" title="Save changes">
+          <button class="save-btn">
             <i class="fas fa-check"></i> Save
           </button>
-          <button class="cancel-btn" title="Cancel">
+          <button class="cancel-btn">
             <i class="fas fa-times"></i> Cancel
           </button>
         </div>

@@ -1,0 +1,80 @@
+/* Add these styles for edit buttons */
+.editable-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.edit-btn {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin-left: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-btn:hover {
+  background-color: #e0e0e0;
+  border-color: #ccc;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+}
+
+.save-btn,
+.cancel-btn {
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+.save-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #45a049;
+}
+
+.save-btn:hover {
+  background-color: #45a049;
+}
+
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+  border: 1px solid #da190b;
+}
+
+.cancel-btn:hover {
+  background-color: #da190b;
+}
+
+.success-message {
+  color: #4CAF50;
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 4px;
+  background-color: #e8f5e9;
+}
+
+.error-message {
+  color: #f44336;
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 4px;
+  background-color: #ffebee;
+}
