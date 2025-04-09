@@ -244,11 +244,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             deleteConfirmation.classList.remove("hidden");
           });
 
-          cancelDeleteBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            deleteConfirmation.classList.add("hidden");
-          });
-
           confirmDeleteBtn.addEventListener("click", async (e) => {
             e.stopPropagation();
             const headerContent = e.target.closest(".candidate-header-content");
@@ -264,23 +259,26 @@ document.addEventListener("DOMContentLoaded", async () => {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  companyIndex: index,
-                  candidateIndex: candidateIndex,
+                  companyIndex,
+                  candidateIndex,
                 }),
               });
 
               if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(
-                  `HTTP error! status: ${response.status}, body: ${errorText}`
-                );
+                throw new Error(`HTTP error! status: ${response.status}`);
               }
 
               const result = await response.json();
 
               if (result.success) {
-                showNotification("Candidate deleted successfully", true);
+                // Remove the candidate container from the DOM
+                const candidateContainer = e.target.closest(
+                  ".candidate-container"
+                );
                 candidateContainer.remove();
+
+                // Show success message
+                showNotification("Candidate deleted successfully", true);
               } else {
                 throw new Error(result.error || "Failed to delete candidate");
               }
@@ -293,6 +291,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             } finally {
               deleteConfirmation.classList.add("hidden");
             }
+          });
+
+          cancelDeleteBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            deleteConfirmation.classList.add("hidden");
           });
 
           // Create candidate table
@@ -937,21 +940,37 @@ function createEditableSalaryField(value, containerId) {
 // Add this function near your other helper functions
 function createDeleteButton(candidateIndex) {
   return `
-        <div class="delete-button-wrapper">
-            <button class="delete-btn" title="Delete candidate">
-                <i class="fas fa-trash"></i>
+    <div class="delete-button-wrapper">
+      <button class="delete-btn" title="Delete candidate">
+        <i class="fas fa-trash"></i>
+      </button>
+      <div class="delete-confirmation-overlay hidden">
+        <div class="delete-confirmation-dialog">
+          <p>Are you sure you want to delete this candidate?</p>
+          <div class="confirmation-buttons">
+            <button class="confirm-delete btn-danger">
+              <i class="fas fa-trash"></i> Yes, Delete
             </button>
-            <div class="delete-confirmation-overlay hidden">
-                <div class="delete-confirmation-dialog">
-                    <p>Are you sure you want to delete this candidate?</p>
-                    <div class="confirmation-buttons">
-                        <button class="confirm-delete btn-danger">Yes, Delete</button>
-                        <button class="cancel-delete btn-secondary">Cancel</button>
-                    </div>
-                </div>
-            </div>
+            <button class="cancel-delete btn-secondary">
+              <i class="fas fa-times"></i> Cancel
+            </button>
+          </div>
         </div>
-    `;
+      </div>
+    </div>
+  `;
+}
+
+// Add this helper function for notifications
+function showNotification(message, isSuccess) {
+  const notification = document.createElement("div");
+  notification.className = `notification ${isSuccess ? "success" : "error"}`;
+  notification.textContent = message;
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.remove();
+  }, 3000);
 }
 
 // Add this helper function for creating editable cost fields
