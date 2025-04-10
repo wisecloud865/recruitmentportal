@@ -7,19 +7,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // Update the fetch to use the API endpoint instead of static file
-    const response = await fetch("/api/getData");
-
-    if (!response.ok) {
-      console.error("Failed to fetch:", response.status, response.statusText);
-      throw new Error(`HTTP error! status: ${response.status}`);
+    // Fetch companies data first
+    const companiesResponse = await fetch("/api/getCompanies");
+    if (!companiesResponse.ok) {
+      throw new Error(`HTTP error! status: ${companiesResponse.status}`);
     }
 
-    const data = await response.json();
-    console.log("Data successfully loaded:", data);
+    const companies = await companiesResponse.json();
+    console.log("Companies data loaded:", companies);
 
-    // Update the company container creation section in your main event listener
-    data.forEach((company, index) => {
+    // Process each company
+    for (const [index, company] of companies.entries()) {
       const companyContainer = document.createElement("div");
       companyContainer.className = "company-container";
 
@@ -38,11 +36,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       // Add all company fields to the table
       Object.entries(company).forEach(([key, value]) => {
-        if (key !== "matched_candidates" && key !== "id") {
+        if (key !== "id") {
           const row = document.createElement("tr");
           row.className = "company-row";
-
-          // Format the value based on field type
           let formattedValue = formatFieldValue(key, value);
 
           row.innerHTML = `
@@ -57,45 +53,67 @@ document.addEventListener("DOMContentLoaded", async () => {
       companyContainer.appendChild(companyTable);
 
       // Add "View Matched Candidates" button
-      if (company.matched_candidates && company.matched_candidates.length > 0) {
-        const viewCandidatesBtn = document.createElement("button");
-        viewCandidatesBtn.className = "view-candidates-btn";
-        viewCandidatesBtn.innerHTML = `
-          <i class="fas fa-users"></i> 
-          View Matched Candidates (${company.matched_candidates.length})
-        `;
+      const viewCandidatesBtn = document.createElement("button");
+      viewCandidatesBtn.className = "view-candidates-btn";
+      viewCandidatesBtn.innerHTML = `
+        <i class="fas fa-users"></i> 
+        View Matched Candidates
+      `;
 
-        // Create candidates container (initially hidden)
-        const candidatesContainer = document.createElement("div");
-        candidatesContainer.className = "candidates-container hidden";
+      // Create candidates container (initially hidden)
+      const candidatesContainer = document.createElement("div");
+      candidatesContainer.className = "candidates-container hidden";
 
-        viewCandidatesBtn.addEventListener("click", () => {
-          const isHidden = candidatesContainer.classList.contains("hidden");
+      viewCandidatesBtn.addEventListener("click", async () => {
+        const isHidden = candidatesContainer.classList.contains("hidden");
 
-          // Toggle button text and icon
-          viewCandidatesBtn.innerHTML = isHidden
-            ? `<i class="fas fa-chevron-up"></i> Hide Candidates`
-            : `<i class="fas fa-users"></i> View Matched Candidates (${company.matched_candidates.length})`;
+        // Toggle button text and icon
+        viewCandidatesBtn.innerHTML = isHidden
+          ? `<i class="fas fa-chevron-up"></i> Hide Candidates`
+          : `<i class="fas fa-users"></i> View Matched Candidates`;
 
-          // Toggle candidates visibility
-          candidatesContainer.classList.toggle("hidden");
+        // Toggle candidates visibility
+        candidatesContainer.classList.toggle("hidden");
 
-          // Load candidates if not already loaded
-          if (isHidden && candidatesContainer.children.length === 0) {
-            loadCandidates(
-              company.matched_candidates,
-              candidatesContainer,
-              index
+        // Load candidates if not already loaded
+        if (isHidden && candidatesContainer.children.length === 0) {
+          try {
+            // Fetch candidates for this company
+            const candidatesResponse = await fetch(
+              `/api/getCandidates/${company.id}`
             );
+            if (!candidatesResponse.ok) {
+              throw new Error(`Failed to load candidates`);
+            }
+
+            const candidates = await candidatesResponse.json();
+            console.log(
+              `Candidates loaded for company ${company.id}:`,
+              candidates
+            );
+
+            if (candidates.length > 0) {
+              loadCandidates(candidates, candidatesContainer, index);
+              // Update button text with count
+              viewCandidatesBtn.innerHTML = isHidden
+                ? `<i class="fas fa-chevron-up"></i> Hide Candidates`
+                : `<i class="fas fa-users"></i> View Matched Candidates (${candidates.length})`;
+            } else {
+              candidatesContainer.innerHTML =
+                "<p>No matched candidates found</p>";
+            }
+          } catch (error) {
+            console.error("Error loading candidates:", error);
+            candidatesContainer.innerHTML =
+              '<p class="error-message">Failed to load candidates</p>';
           }
-        });
+        }
+      });
 
-        companyContainer.appendChild(viewCandidatesBtn);
-        companyContainer.appendChild(candidatesContainer);
-      }
-
+      companyContainer.appendChild(viewCandidatesBtn);
+      companyContainer.appendChild(candidatesContainer);
       companiesSection.appendChild(companyContainer);
-    });
+    }
   } catch (error) {
     console.error("Error details:", error);
     document.getElementById(
