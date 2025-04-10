@@ -38,6 +38,26 @@ document.addEventListener("DOMContentLoaded", async () => {
       throw new Error("Companies section not found!");
     }
 
+    // Add Back to Top button
+    const backToTopBtn = document.createElement("button");
+    backToTopBtn.className = "back-to-top";
+    backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    document.body.appendChild(backToTopBtn);
+
+    // Handle Back to Top visibility
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 300) {
+        backToTopBtn.classList.add("visible");
+      } else {
+        backToTopBtn.classList.remove("visible");
+      }
+    });
+
+    // Handle Back to Top click
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
     // First load metadata to get total pages
     const metadataResponse = await fetch("/public/companies/metadata.json");
     if (!metadataResponse.ok) {
@@ -45,10 +65,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     const metadata = await metadataResponse.json();
 
-    // Add pagination controls
+    // Move pagination container to bottom
+    const paginationWrapper = document.createElement("div");
+    paginationWrapper.className = "pagination-wrapper";
     const paginationContainer = document.createElement("div");
     paginationContainer.className = "pagination-controls";
-    companiesSection.appendChild(paginationContainer);
+    paginationWrapper.appendChild(paginationContainer);
+    document.body.appendChild(paginationWrapper);
 
     // Function to render companies for a page
     async function renderCompaniesPage(pageNumber) {
@@ -165,6 +188,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Update pagination controls
         updatePaginationControls(pageNumber, metadata.totalPages);
+
+        // Ensure pagination wrapper stays at bottom
+        document.body.appendChild(paginationWrapper);
       } catch (error) {
         console.error("Error loading page:", error);
         showNotification(`Failed to load page ${pageNumber}`, false);
