@@ -536,7 +536,7 @@ header,
   color: var(--primary-black); /* Changed color to black */
   background-color: rgba(
     224,
-    160,
+     160,
     163,
     0.1
   ); /* Increased opacity for better contrast */
@@ -798,11 +798,13 @@ header,
 }
 
 .company-header {
-  padding: 1rem;
-  margin-bottom: 1rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
   text-align: center;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
   background: none;
 }
 
@@ -818,11 +820,9 @@ header,
   padding: 0;
 }
 
-.table-title1 i {
-  color: var(--primary-pink);
-}
-
 .company-type-indicators {
+  display: inline-flex;
+  align-items: center;
   display: inline-flex;
   align-items: center;
   margin-left: 1rem;

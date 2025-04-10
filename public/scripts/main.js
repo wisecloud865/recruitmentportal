@@ -228,6 +228,9 @@ function createCompanyTitle(company) {
           ${companyTypeIndicators}
         </div>
       </h2>
+      <button class="send-email-btn">
+        <i class="fas fa-envelope"></i> Send Email
+      </button>
     </div>
   `;
 }
