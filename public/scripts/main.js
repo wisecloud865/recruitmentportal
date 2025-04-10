@@ -220,28 +220,33 @@ function createCompanyTitle(company) {
   const companyTypeIndicators = createCompanyTypeIndicators(company);
 
   return `
-    <h3 class="company-title">
-      <i class="fas fa-building"></i>
-      ${companyName}
-      <div class="company-type-indicators">
-        ${companyTypeIndicators}
-      </div>
-    </h3>
+    <div class="company-header">
+      <h2 class="table-title1">
+        <i class="fas fa-building"></i>
+        ${companyName}
+        <div class="company-type-indicators">
+          ${companyTypeIndicators}
+        </div>
+      </h2>
+    </div>
   `;
 }
 
 function createCompanyTypeIndicators(company) {
-  let indicator = "";
+  // Check consultantcompany and recruitmentcompany values from JSON
+  const isConsultant =
+    company.consultantcompany === true || company.consultantcompany === "true";
+  const isRecruitment =
+    company.recruitmentcompany === true ||
+    company.recruitmentcompany === "true";
 
-  if (company.consultantcompany) {
-    indicator =
-      '<span class="legend-dot black" title="Consultant Company"></span>';
-  } else if (company.recruitmentcompany) {
-    indicator =
-      '<span class="legend-dot pink" title="Recruitment Company"></span>';
+  // Return only one dot based on company type
+  if (isConsultant) {
+    return '<span class="legend-dot black" title="Consultant Company"></span>';
+  } else if (isRecruitment) {
+    return '<span class="legend-dot pink" title="Recruitment Company"></span>';
   }
-
-  return indicator;
+  return ""; // Return empty string if neither type
 }
 
 // Add this function after the createCompanyTitle function
