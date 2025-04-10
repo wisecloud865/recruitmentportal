@@ -1,0 +1,20 @@
+[
+  {
+    "id": 100000594,
+    "full_name": "Mark Drake",
+    "email": "markdrake0916@gmail.com",
+    "description": "10+ års erfarenhet och resultatorienterad teamledare med kompetens inom frontend- och backend-utveckling.",
+    "resume": "100000594_Mark_Drake.pdf",
+    "phone_number": "096000471",
+    "address": "Jõhvi",
+    "latest_degree": "Bachelor's degree",
+    "latest_university": "The Hong Kong University of Science and Technology",
+    "current_company": "LeoLuca",
+    "current_position": "Fullstack webbutvecklare",
+    "current_position_description": "Leda team som utvecklar applikationer och spela en avgörande roll i utvecklingslivscykeln.",
+    "total_workexperience": "10 år 6 månader",
+    "techterms": "React Native, React JS, Node JS, JavaScript, TypeScript",
+    "expected_salary": 125000,
+    "expected_cost": 35982
+  }
+]

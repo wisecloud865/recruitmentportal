@@ -1,0 +1,38 @@
+[
+  {
+    "id": 100000907,
+    "full_name": "Monica S. Maninang",
+    "email": "ms.maninang@gmail.com",
+    "description": "Ett engagerat HR-proffs med över 10 års erfarenhet av onboarding, datahantering och administration av förmåner.",
+    "resume": "100000907_Monica_S_Maninang.pdf",
+    "phone_number": "09267274627",
+    "address": "Philippines",
+    "latest_degree": "BS in Nursing",
+    "latest_university": "Silliman University",
+    "current_company": "Stellar Philippines, Inc.",
+    "current_position": "HR-chef",
+    "current_position_description": "Handledning av teammedlemmar, onboarding, efterlevnad av regler före anställning, visumansökningar och administration av förmåner.",
+    "total_workexperience": "14 år 3 månader",
+    "techterms": "Onboarding,Data,Management,Benefits,Administration,Teamwork,Customer,Service",
+    "expected_salary": 75000,
+    "expected_cost": 25800
+  },
+  {
+    "id": 100001074,
+    "full_name": "Ma. Swannie A. Sison",
+    "email": "swanniesison@yahoo.com",
+    "description": "Hårt arbetande person med stark kunskap om banktjänster och kundserviceförmåga.",
+    "resume": "100001074_Ma_Swannie_A_Sison.pdf",
+    "phone_number": "09475104145",
+    "address": "Antipolo City",
+    "latest_degree": "BA Major Banking and Finance",
+    "latest_university": "University of the East C. M Recto Manila",
+    "current_company": "Security Bank Corporation",
+    "current_position": "Servicemedarbetare på filial",
+    "current_position_description": "Ansvarig för daglig drift och underhåll av kassavalvet, hantering av kontantrörelser och leverans av tjänster.",
+    "total_workexperience": "19 år 8 månader",
+    "techterms": "Communication Skills, Problem solving, Customer Service, Numeracy Skills, Teamwork",
+    "expected_salary": 62500,
+    "expected_cost": 23255
+  }
+]

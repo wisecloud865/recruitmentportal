@@ -1,0 +1,38 @@
+[
+  {
+    "id": 100000437,
+    "full_name": "Alyssa Buenaventura",
+    "email": "lysabalingit1097@gmail.com",
+    "description": "Software Quality Engineer med 4+ års erfarenhet av manuell och automatiserad testmetodik.",
+    "resume": "100000437_Alyssa_Buenaventura.pdf",
+    "phone_number": "09550420491",
+    "address": "Bulacan",
+    "latest_degree": "Bachelor of Science in Computer Engineering",
+    "latest_university": "Bulacan State University",
+    "current_company": "RealPage (Philippines) INC.",
+    "current_position": "Kvalitetsingenjör",
+    "current_position_description": "Kompetent inom både manuell och automatiserad testning, hantering av defekter och samarbete med team för att leverera mjukvarulösningar.",
+    "total_workexperience": "4 år 6 månader",
+    "techterms": "Selenium,JAVA,Rest,Assured,SQL,Server,GIT",
+    "expected_salary": 67500,
+    "expected_cost": 24273
+  },
+  {
+    "id": 100001607,
+    "full_name": "Hazel Kimberly C. Tan",
+    "email": "hzlkmbrly@gmail.com",
+    "description": "En välutbildad mjukvaruingenjör med lång erfarenhet av ERP-lösningar i molnet.",
+    "resume": "100001607_Hazel_Kimberly_C_Tan.pdf",
+    "phone_number": "09178500587",
+    "address": "Manila",
+    "latest_degree": "Bachelor of Science in Information Technology",
+    "latest_university": "University of Santo Tomas",
+    "current_company": "Infor PSSC",
+    "current_position": "Ledande mjukvaruutvecklare",
+    "current_position_description": "Designar och utvecklar optimerade datalösningar och API:er, underlättar teamsessioner och övervakar biljettdistribution.",
+    "total_workexperience": "10 år 6 månader",
+    "techterms": "Java,Python,SQL,REST,API,Agile",
+    "expected_salary": 162500,
+    "expected_cost": 43618
+  }
+]

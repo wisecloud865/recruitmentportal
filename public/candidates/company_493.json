@@ -1,0 +1,38 @@
+[
+  {
+    "id": 100000526,
+    "full_name": "Benedict Aseron",
+    "email": "benedictlaseron@gmail.com",
+    "description": "Professionell med 6 års erfarenhet av Talent Acquisition och placering.",
+    "resume": "100000526_Benedict_Aseron.pdf",
+    "phone_number": "09173815837",
+    "address": "Makati",
+    "latest_degree": "Bachelor of Science in Psychology",
+    "latest_university": "Centro Escolar University",
+    "current_company": "Thumbtack Philippines",
+    "current_position": "Rekryterare",
+    "current_position_description": "Hanterade rekryteringsprocessen, överträffade målen och förbättrade rekryteringsmetoderna för Thumbtack.",
+    "total_workexperience": "6 år",
+    "techterms": "Talent Acquisition, Sourcing, Recruitment, Project Management, Communication",
+    "expected_salary": 125000,
+    "expected_cost": 35982
+  },
+  {
+    "id": 100001633,
+    "full_name": "Princess Mae D. Morales",
+    "email": "morales.pmd@gmail.com",
+    "description": "Erfaren Executive Assistant med kompetens inom IT, myndigheter, detaljhandel och tillverkningsindustri.",
+    "resume": "100001633_Princess_Mae_D_Morales.pdf",
+    "phone_number": "09393436717",
+    "address": "San Pedro",
+    "latest_degree": "B.S. Information Management",
+    "latest_university": "Adamson University",
+    "current_company": "Yngen Datacom Corp.",
+    "current_position": "Junior verkställande assistent",
+    "current_position_description": "Tillhandahålla administrativt stöd till Sr. Executive Assistant och ledningsgruppen, hantera dokumentation och evenemang.",
+    "total_workexperience": "15 år 4 månader",
+    "techterms": "Organization,Communication,Flexibility,Proactive,Management",
+    "expected_salary": 75000,
+    "expected_cost": 25800
+  }
+]

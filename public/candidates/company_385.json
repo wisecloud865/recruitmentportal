@@ -1,0 +1,38 @@
+[
+  {
+    "id": 100000028,
+    "full_name": "Christian Paul D. Eden",
+    "email": "paul.christian1993@gmail.com",
+    "description": "Erfaren IT-proffs med expertis inom systemadministration, serverhantering och teknisk support. Kunnig inom Linux/Windows serveradministration, automatiseringsverktyg och nätverkssäkerhet.",
+    "resume": "100000002_Christian_Paul_D_Eden.pdf",
+    "phone_number": "09279523967",
+    "address": "Pasig",
+    "latest_degree": "Bachelor of Science major in Information Technology",
+    "latest_university": "Pasig Catholic College",
+    "current_company": "Bubblegum Interactive",
+    "current_position": "Systemadministratör",
+    "current_position_description": "Ansvarig för serverunderhåll, applikationssupport och automatiseringsskript. Säkerställer serverns drifttid, säkerhet och prestandaövervakning med hjälp av verktyg som Nagios och Grafana.",
+    "total_workexperience": "9 år 10 månader",
+    "techterms": "Linux, Windows Server, Automation Tools, Monitoring Tools, Network Security",
+    "expected_salary": 120000,
+    "expected_cost": 34964
+  },
+  {
+    "id": 100000031,
+    "full_name": "Adelbert C. Arzadon",
+    "email": "arzadoncorp@gmail.com",
+    "description": "Erfaren senior systemadministratör med expertis inom AWS, Azure och Windows/Linux-miljöer. Skicklig inom DevOps, nätverksövervakning och IT-infrastrukturhantering.",
+    "resume": "100000031_Adelbert_C_Arzadon.pdf",
+    "phone_number": "099081054000",
+    "address": "San Pedro",
+    "latest_degree": "Computer Systems and Networking Technology",
+    "latest_university": "AMA Computer Learning Center",
+    "current_company": "Deltek Systems (Phils.) Ltd.",
+    "current_position": "Senior systemadministratör (DCO SysAdmin)",
+    "current_position_description": "Ledande DevOps-ingenjör för implementering av AWS System Manager. Administrerar PRTG-servrar, övervakar AWS-instanser och utför OS-patchning. Tillhandahåller nivå 3 eskalering och 24/7 jourstöd.",
+    "total_workexperience": "10 år 6 månader",
+    "techterms": "AWS, Azure, Windows Server, Linux, PowerShell",
+    "expected_salary": 93750,
+    "expected_cost": 29618
+  }
+]

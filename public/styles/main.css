@@ -4310,3 +4310,69 @@ tr.company-hidden {
   background-color: #e9ecef;
   transform: translateY(-2px);
 }
+.candidates-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.candidates-modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 80%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.candidates-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.close-modal-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.candidates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.view-candidates-btn {
+  background: linear-gradient(
+    135deg,
+    var(--primary-pink) 0%,
+    var(--secondary-pink) 100%
+  );
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  margin: 1rem 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.view-candidates-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(224, 160, 163, 0.4);
+}

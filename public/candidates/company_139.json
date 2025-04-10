@@ -1,0 +1,38 @@
+[
+  {
+    "id": 100000230,
+    "full_name": "Patrick Guillano La Rosa",
+    "email": "pgplarosa@gmail.com",
+    "description": "Data science manager med över 7 års erfarenhet av data science och programvaruteknik.",
+    "resume": "100000230_Patrick_Guillano_La_Rosa.pdf",
+    "phone_number": "09178302403",
+    "address": "Pasig",
+    "latest_degree": "Master of Science in Data Science",
+    "latest_university": "Asian Institute of Management",
+    "current_company": "TDCX",
+    "current_position": "Global Data Science Senior Manager",
+    "current_position_description": "Konceptualisering och hantering av datavetenskapliga lösningar inom BPO-industrin med tonvikt på AI.",
+    "total_workexperience": "7 år 5 månader",
+    "techterms": "Python,TensorFlow,PyTorch,AWS,SQL",
+    "expected_salary": 187500,
+    "expected_cost": 48709
+  },
+  {
+    "id": 100001831,
+    "full_name": "Fidel Ivan C. Racines",
+    "email": "fidelivancdo@gmail.com",
+    "description": "Data Science Practitioner med 2+ år inom marknadsförings- och affärsforskning genom data och SEO-metoder.",
+    "resume": "100001831_Fidel_Ivan_C_Racines.pdf",
+    "phone_number": "09164339119",
+    "address": "Cagayan",
+    "latest_degree": "Master’s in Machine Learning & Artificial Intelligence",
+    "latest_university": "IIIT Bangalore",
+    "current_company": "AMA university",
+    "current_position": "AI-mjukvaruutvecklare",
+    "current_position_description": "Utveckla AI-programvara för att öka produktiviteten på universitetet och hjälpa studenter att höja sin kompetens med hjälp av AI.",
+    "total_workexperience": "4 år 5 månader",
+    "techterms": "Tensorflow,Pytorch,Keras,OpenCV,CNN",
+    "expected_salary": 112500,
+    "expected_cost": 33436
+  }
+]

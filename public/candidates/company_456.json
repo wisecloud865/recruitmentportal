@@ -1,0 +1,20 @@
+[
+  {
+    "id": 100000557,
+    "full_name": "Jose Leandrino Anajao",
+    "email": "liyannguyenn@gmail.com",
+    "description": "Full Stack Web/Mobile Developer med expertis inom modern webbteknik.",
+    "resume": "100000557_Jose_Leandrino_Anajao.pdf",
+    "phone_number": "09500900929",
+    "address": "Makati",
+    "latest_degree": "Bachelor in Computer Science",
+    "latest_university": "University of Wollongong Australia",
+    "current_company": "1 Bit Software Development Corp",
+    "current_position": "Full Stack Web/Mobile-utvecklare",
+    "current_position_description": "Utvecklar webb- och mobilapplikationer, samordnar med team och säkerställer implementering av funktioner.",
+    "total_workexperience": "5 år 6 månader",
+    "techterms": "React,JavaScript,TypeScript,Figma,Git",
+    "expected_salary": 75000,
+    "expected_cost": 25800
+  }
+]

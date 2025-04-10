@@ -1,0 +1,20 @@
+[
+  {
+    "id": 100000016,
+    "full_name": "Alvin Sacdalan",
+    "email": "alvin05sacdalan@gmail.com",
+    "description": "10 års erfarenhet som systemingenjör med expertis inom Azure, Microsoft 365 och ITIL-ramverket. Stark bakgrund inom IT-support på distans och leverantörer av managed services.",
+    "resume": "100000016_Alvin_Sacdalan.pdf",
+    "phone_number": "0993936379",
+    "address": "Taytay",
+    "latest_degree": "Bachelor of Science in Human Resource Development Management",
+    "latest_university": "Polytechnic University of the Philippines",
+    "current_company": "ASG Philippines - Unitywater Australia",
+    "current_position": "EUC-ingenjör / Support för fjärrskrivbord",
+    "current_position_description": "SME och eskaleringspunkt för Microsoft 365-frågor, hantering av skrivbordspatchning via SCCM och lösning av SOE-skrivbordsproblem som eskaleras av Service Desk.",
+    "total_workexperience": "6 år 6 månader",
+    "techterms": "Microsoft 365, Azure, Microsoft Teams, Active Directory, Windows Server",
+    "expected_salary": 75000,
+    "expected_cost": 25800
+  }
+]

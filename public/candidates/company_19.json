@@ -1,0 +1,38 @@
+[
+  {
+    "id": 100000716,
+    "full_name": "Adrianne Mei P. Esguerra",
+    "email": "drai21meianne@gmail.com",
+    "description": "Tidigare internrevisor och medarbetare inom finansiell planering med expertis inom finansiell och administrativ analys.",
+    "resume": "100000716_Adrianne_Mei_P_Esguerra.pdf",
+    "phone_number": "09193906296",
+    "address": "Makati",
+    "latest_degree": "MBA / Finance (unfinished)",
+    "latest_university": "PUP Graduate School",
+    "current_company": "The Philippine Daily Inquirer, Inc.",
+    "current_position": "Associate inom finansiell planering",
+    "current_position_description": "Effektiviserade analysen av finansiella data, utarbetade rapporter och hanterade utbetalningar av incitament.",
+    "total_workexperience": "13 år 2 månader",
+    "techterms": "Analytical Skills, Attention to Details, IT Competence, Leadership, Problem Solving",
+    "expected_salary": 93750,
+    "expected_cost": 29618
+  },
+  {
+    "id": 100000877,
+    "full_name": "Karen Dannica Mae Acuña",
+    "email": "karendmacuna@gmail.com",
+    "description": "Certifierad industriingenjör med fem års erfarenhet av data och analys.",
+    "resume": "100000877_Karen_Dannica_Mae_Acuña.pdf",
+    "phone_number": "09199947940",
+    "address": "",
+    "latest_degree": "Bachelor of Science in Industrial Engineering",
+    "latest_university": "Mapúa University",
+    "current_company": "Kumu Inc.",
+    "current_position": "Senior dataanalytiker",
+    "current_position_description": "Handledde nyanställda dataanalytiker och integrerade kritisk affärslogik i datakällor.",
+    "total_workexperience": "6 år 5 månader",
+    "techterms": "Python, SQL, Data Analysis, Data Extraction, Data Scraping",
+    "expected_salary": 93750,
+    "expected_cost": 29618
+  }
+]

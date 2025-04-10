@@ -1,0 +1,38 @@
+[
+  {
+    "id": 100000239,
+    "full_name": "Mark Lester C. Dumlao",
+    "email": "dumlao.marklester@gmail.com",
+    "description": "En mjukvaruingenjör med nästan 5 års erfarenhet av internationella organisationer och startup-organisationer, utmärkta analytiska färdigheter.",
+    "resume": "100000239_Mark_Lester_C_Dumlao.pdf",
+    "phone_number": "09177715056",
+    "address": "Cainta",
+    "latest_degree": "Masters in Technology Management",
+    "latest_university": "University of the Philippines – Diliman",
+    "current_company": "NTEK SYSTEMS INC.",
+    "current_position": "Programvaruingenjör II",
+    "current_position_description": "Designar, utvecklar och felsöker firmware för inbyggda enheter, stöder hårdvaru- och QA-team, underhåller kodarkiv.",
+    "total_workexperience": "10 år 3 månader",
+    "techterms": "C,C++,Linux,Git,Arduino",
+    "expected_salary": 87500,
+    "expected_cost": 28345
+  },
+  {
+    "id": 100000344,
+    "full_name": "Rean A. Estrada",
+    "email": "rean.estrada@yahoo.com",
+    "description": "Erfarenhet av mjukvaruutveckling med expertis inom C++ och öppen källkodsteknik. Kompetent inom administration och ingenjörsroller.",
+    "resume": "100000344_Rean_A_Estrada.pdf",
+    "phone_number": "09357594676",
+    "address": "Manila",
+    "latest_degree": "Advance Diploma in Computer Studies",
+    "latest_university": "Informatics Computer Institute",
+    "current_company": "Ascendant Technologies Inc.",
+    "current_position": "Linux-systemadministratör, nätverksadministratör, C++-programmerare, databasadministratör/programmerare, webbutvecklare, programvarutestare",
+    "current_position_description": "Hanterade nätverk, utvecklade C++-applikationer och säkerställde programvarans integritet med hjälp av open source-teknik.",
+    "total_workexperience": "8 år 5 månader",
+    "techterms": "C,C++,Java,PHP,Linux",
+    "expected_salary": 93750,
+    "expected_cost": 29618
+  }
+]

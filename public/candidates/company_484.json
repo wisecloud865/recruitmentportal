@@ -1,0 +1,20 @@
+[
+  {
+    "id": 100000050,
+    "full_name": "Jet Westjeck A. Hilario",
+    "email": "jethilario3912@gmail.com",
+    "description": "En skicklig IT-proffs med erfarenhet av webbprogrammering, webbdesign och systemutveckling. Söker tillväxtmöjligheter inom IT.",
+    "resume": "100000050_Jet_Westjeck_A_Hilario.pdf",
+    "phone_number": "099777945901",
+    "address": "Caloocan City",
+    "latest_degree": "Bachelor of Science in Information Technology",
+    "latest_university": "STI COLLEGE CALOOCAN",
+    "current_company": "Office of Civil Defense (RRMS)",
+    "current_position": "Systemutvecklare",
+    "current_position_description": "Utvecklar och underhåller system för kontoret för civilförsvar. I arbetsuppgifterna ingår programmering, felsökning och IT-support.",
+    "total_workexperience": "2 år 11 månader",
+    "techterms": "PHP, RestAPI, HTML5, CSS, SQL SERVER, MySQL, Microsoft Office, Shopify, Wordpress, MailChimp, Adobe Photoshop CS6",
+    "expected_salary": 0,
+    "expected_cost": 0
+  }
+]

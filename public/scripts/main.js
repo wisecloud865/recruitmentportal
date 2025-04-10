@@ -7,19 +7,22 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // Update the fetch to use the API endpoint instead of static file
-    const response = await fetch("/api/getData");
-
-    if (!response.ok) {
-      console.error("Failed to fetch:", response.status, response.statusText);
-      throw new Error(`HTTP error! status: ${response.status}`);
+    // First, fetch the metadata to get pagination info
+    const metadataResponse = await fetch("/api/getMetadata");
+    if (!metadataResponse.ok) {
+      throw new Error(`HTTP error! status: ${metadataResponse.status}`);
     }
+    const metadata = await metadataResponse.json();
 
-    const data = await response.json();
-    console.log("Data successfully loaded:", data);
+    // Fetch first page of companies
+    const companiesResponse = await fetch("/api/getCompanies?page=1");
+    if (!companiesResponse.ok) {
+      throw new Error(`HTTP error! status: ${companiesResponse.status}`);
+    }
+    const companiesData = await companiesResponse.json();
 
-    // Process companies
-    data.forEach((company, index) => {
+    // Process each company
+    companiesData.companies.forEach((company, index) => {
       const companyContainer = document.createElement("div");
       companyContainer.className = "company-container";
 
@@ -196,271 +199,86 @@ document.addEventListener("DOMContentLoaded", async () => {
         confirmationDialog.classList.add("hidden");
       });
 
-      // In your code where you create the candidates section, modify it like this:
-      if (company.matched_candidates && company.matched_candidates.length > 0) {
-        // Create a separate container for all candidates
-        const candidatesWrapper = document.createElement("div");
-        candidatesWrapper.className = "candidates-wrapper";
+      // Add "View Candidates" button
+      const viewCandidatesBtn = document.createElement("button");
+      viewCandidatesBtn.className = "view-candidates-btn";
+      viewCandidatesBtn.innerHTML = `
+        <i class="fas fa-users"></i> View Matched Candidates
+      `;
 
-        // Add the candidates heading
-        const candidatesHeading = document.createElement("h3");
-        candidatesHeading.innerHTML =
-          '<i class="fas fa-users"></i> Matched Candidates';
-        candidatesHeading.className = "candidates-heading";
-        candidatesWrapper.appendChild(candidatesHeading);
+      // Add click handler for the View Candidates button
+      viewCandidatesBtn.addEventListener("click", async () => {
+        try {
+          // Fetch candidates for this company
+          const candidatesResponse = await fetch(
+            `/api/getCandidates/${company.id}`
+          );
+          if (!candidatesResponse.ok) {
+            throw new Error("Failed to fetch candidates");
+          }
 
-        company.matched_candidates.forEach((candidate, candidateIndex) => {
-          // Create individual candidate container
-          const candidateContainer = document.createElement("div");
-          candidateContainer.className = "candidate-container";
+          const candidates = await candidatesResponse.json();
 
-          // Add candidate header with name
-          const candidateHeader = document.createElement("div");
-          candidateHeader.className = "candidate-header";
-          candidateHeader.innerHTML = `
-            <div class="candidate-header-content" data-company-index="${index}" data-candidate-index="${candidateIndex}">
-                <div class="candidate-name">
-                    <i class="fas fa-user"></i> ${
-                      candidate.full_name || `Candidate ${candidateIndex + 1}`
-                    }
-                </div>
-                ${createDeleteButton(candidateIndex)}
+          // Create modal to display candidates
+          const modal = document.createElement("div");
+          modal.className = "candidates-modal";
+          modal.innerHTML = `
+            <div class="candidates-modal-content">
+              <div class="candidates-modal-header">
+                <h3>Matched Candidates for ${company.företagsnamn}</h3>
+                <button class="close-modal-btn">&times;</button>
+              </div>
+              <div class="candidates-grid">
+                ${candidates
+                  .map(
+                    (candidate) => `
+                  <div class="candidate-card">
+                    <h4>${candidate.full_name}</h4>
+                    <p><strong>Experience:</strong> ${
+                      candidate.total_workexperience
+                    }</p>
+                    <p><strong>Tech Stack:</strong> ${candidate.techterms}</p>
+                    <p><strong>Expected Salary:</strong> ${Number(
+                      candidate.expected_salary
+                    ).toLocaleString()}</p>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
             </div>
-        `;
-          candidateContainer.appendChild(candidateHeader);
+          `;
 
-          // Add this after creating the candidate header
-          const deleteBtn = candidateHeader.querySelector(".delete-btn");
-          const deleteConfirmation = candidateHeader.querySelector(
-            ".delete-confirmation-overlay"
-          );
-          const confirmDeleteBtn =
-            candidateHeader.querySelector(".confirm-delete");
-          const cancelDeleteBtn =
-            candidateHeader.querySelector(".cancel-delete");
+          document.body.appendChild(modal);
 
-          deleteBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            deleteConfirmation.classList.remove("hidden");
+          // Handle modal close
+          const closeBtn = modal.querySelector(".close-modal-btn");
+          closeBtn.addEventListener("click", () => {
+            modal.remove();
           });
 
-          confirmDeleteBtn.addEventListener("click", async (e) => {
-            e.stopPropagation();
-            const headerContent = e.target.closest(".candidate-header-content");
-            const companyIndex = parseInt(headerContent.dataset.companyIndex);
-            const candidateIndex = parseInt(
-              headerContent.dataset.candidateIndex
-            );
-
-            try {
-              const response = await fetch("/api/deleteCandidate", {
-                method: "DELETE",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  companyIndex,
-                  candidateIndex,
-                }),
-              });
-
-              if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-              }
-
-              const result = await response.json();
-
-              if (result.success) {
-                // Remove the candidate container from the DOM
-                const candidateContainer = e.target.closest(
-                  ".candidate-container"
-                );
-                candidateContainer.remove();
-
-                // Show success message
-                showNotification("Candidate deleted successfully", true);
-              } else {
-                throw new Error(result.error || "Failed to delete candidate");
-              }
-            } catch (error) {
-              console.error("Delete failed:", error);
-              showNotification(
-                `Failed to delete candidate: ${error.message}`,
-                false
-              );
-            } finally {
-              deleteConfirmation.classList.add("hidden");
+          // Close modal when clicking outside
+          modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+              modal.remove();
             }
           });
+        } catch (error) {
+          console.error("Error loading candidates:", error);
+          showNotification("Failed to load candidates", false);
+        }
+      });
 
-          cancelDeleteBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            deleteConfirmation.classList.add("hidden");
-          });
-
-          // Create candidate table
-          const candidateTable = document.createElement("table");
-          candidateTable.className = "info-table candidate-table";
-
-          // Add table header
-          candidateTable.appendChild(
-            createTableHeader("Candidate Information", "Details")
-          );
-
-          const candidateTbody = document.createElement("tbody");
-
-          // Define default candidate fields to show
-          const defaultCandidateFields = [
-            { label: "Total Work Experience", key: "total_workexperience" },
-            { label: "Techterms", key: "techterms" },
-            { label: "Description", key: "description" },
-            { label: "Resume", key: "resume" },
-            { label: "Expected Salary", key: "expected_salary" },
-            { label: "Expected Cost", key: "expected_cost" },
-          ];
-
-          // Add default candidate information rows (first 6 rows)
-          defaultCandidateFields.forEach((field) => {
-            const row = document.createElement("tr");
-            row.className = "candidate-row visible"; // Add visible class
-            let value = candidate[field.key] || "N/A";
-
-            // Check if the field is an email or phone
-            if (field.key.toLowerCase().includes("email")) {
-              row.innerHTML = `
-                    <td class="info-label">${field.label}</td>
-                    <td class="info-value">${createEmailLink(value)}</td>
-                `;
-            } else if (
-              field.key.toLowerCase().includes("phone") ||
-              field.key.toLowerCase().includes("telefon")
-            ) {
-              row.innerHTML = `
-                    <td class="info-label">${field.label}</td>
-                    <td class="info-value">${createPhoneLink(value)}</td>
-                `;
-            } else if (field.key === "expected_salary") {
-              const containerId = `salary-${index}-${candidateIndex}`;
-              row.innerHTML = `
-                <td class="info-label">${field.label}</td>
-                <td class="info-value">${createEditableSalaryField(
-                  value,
-                  containerId
-                )}</td>
-              `;
-
-              setTimeout(() => {
-                const container = document.getElementById(containerId);
-                if (container) {
-                  setupSalaryEditor(
-                    container,
-                    value,
-                    candidate,
-                    index,
-                    candidateIndex
-                  );
-                }
-              }, 0);
-            } else if (field.key === "expected_cost") {
-              const containerId = `cost-${index}-${candidateIndex}`;
-              row.innerHTML = `
-                <td class="info-label">${field.label}</td>
-                <td class="info-value">${createEditableCostField(
-                  value,
-                  containerId
-                )}</td>
-              `;
-
-              setTimeout(() => {
-                const container = document.getElementById(containerId);
-                if (container) {
-                  setupCostEditor(
-                    container,
-                    value,
-                    candidate,
-                    index,
-                    candidateIndex
-                  );
-                }
-              }, 0);
-            } else {
-              row.innerHTML = `
-                    <td class="info-label">${field.label}</td>
-                    <td class="info-value">${value}</td>
-                `;
-            }
-
-            candidateTbody.appendChild(row);
-          });
-
-          // Add hidden class to non-default fields
-          Object.entries(candidate).forEach(([key, value]) => {
-            if (!defaultCandidateFields.some((field) => field.key === key)) {
-              const row = document.createElement("tr");
-              // Update class names to be more specific
-              row.className = "candidate-extra-row hidden";
-              row.setAttribute("data-candidate-id", candidateIndex); // Add data attribute
-              row.style.display = "none";
-
-              // Check if the field is an email or phone
-              if (key.toLowerCase().includes("email")) {
-                row.innerHTML = `
-                        <td class="info-label">${key
-                          .replace(/_/g, " ")
-                          .toUpperCase()}</td>
-                        <td class="info-value">${createEmailLink(value)}</td>
-                    `;
-              } else if (
-                key.toLowerCase().includes("phone") ||
-                key.toLowerCase().includes("telefon")
-              ) {
-                row.innerHTML = `
-                        <td class="info-label">${key
-                          .replace(/_/g, " ")
-                          .toUpperCase()}</td>
-                        <td class="info-value">${createPhoneLink(value)}</td>
-                    `;
-              } else {
-                row.innerHTML = `
-                        <td class="info-label">${key
-                          .replace(/_/g, " ")
-                          .toUpperCase()}</td>
-                        <td class="info-value">${value || "N/A"}</td>
-                    `;
-              }
-
-              candidateTbody.appendChild(row);
-            }
-          });
-
-          candidateTable.appendChild(candidateTbody);
-          candidateContainer.appendChild(candidateTable);
-
-          // Add candidate dropdown button
-          const candidateDropdownBtn = document.createElement("button");
-          candidateDropdownBtn.className = "candidate-only-dropdown";
-          candidateDropdownBtn.setAttribute("data-table-id", candidateTable.id); // Add this line
-          candidateDropdownBtn.innerHTML =
-            'Show More Candidate Info <i class="fas fa-caret-down"></i>';
-          candidateContainer.appendChild(candidateDropdownBtn);
-
-          // Update how you call handleCandidateDropdown
-          const updatedBtn = handleCandidateDropdown(
-            candidateContainer,
-            candidateTable,
-            candidateDropdownBtn
-          );
-
-          candidatesWrapper.appendChild(candidateContainer);
-        });
-
-        // Append the entire candidates wrapper after the company container
-        companyContainer.parentNode.insertBefore(
-          candidatesWrapper,
-          companyContainer.nextSibling
-        );
-      }
+      companyContainer.appendChild(viewCandidatesBtn);
+      companiesSection.appendChild(companyContainer);
     });
+
+    // Add pagination controls if needed
+    if (metadata.totalPages > 1) {
+      const paginationContainer = document.createElement("div");
+      paginationContainer.className = "pagination";
+      // Add pagination UI here
+    }
   } catch (error) {
     console.error("Error details:", error);
     document.getElementById(

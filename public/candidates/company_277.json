@@ -1,0 +1,20 @@
+[
+  {
+    "id": 100000293,
+    "full_name": "Bea Charmelyn Lambitco",
+    "email": "bealambitco@yahoo.com",
+    "description": "Dynamisk dataledare med över sju års erfarenhet av analys, ledde data- och analysteam, implementerade Azure Synapse Analytics.",
+    "resume": "100000293_Bea_Charmelyn_Lambitco.pdf",
+    "phone_number": "09178717815",
+    "address": "Cavite",
+    "latest_degree": "Master in Applied Mathematics Major in Mathematical Finance",
+    "latest_university": "Ateneo de Manila University",
+    "current_company": "ATR Trust Corporation",
+    "current_position": "Data- och analyschef",
+    "current_position_description": "Leder data- och analysgruppen, implementerar datastrategier och övervakar utvecklingen av datalager.",
+    "total_workexperience": "6 år 11 månader",
+    "techterms": "Azure Synapse Analytics, Data Build Tool, SQL, Python, Power BI",
+    "expected_salary": 187500,
+    "expected_cost": 48709
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "id": 100000171,
+    "full_name": "Alvin Terrible",
+    "email": "alvinterrible6_eq7@indeedemail.com",
+    "description": "Erfaren inom utveckling av webbapplikationer, kunnig inom apparkitektur och felsökning.",
+    "resume": "100000171_Alvin_Terrible.pdf",
+    "phone_number": "09165902044",
+    "address": "Mandaluyong",
+    "latest_degree": "Bachelor of Science in Computer Engineering",
+    "latest_university": "Rizal Technological University",
+    "current_company": "BLASTASIA, INC.",
+    "current_position": "Teamledare - Senior mjukvaruutvecklare IV",
+    "current_position_description": "Ledde Agile Team, fungerade som mjukvaruarkitekt och säkerställde att lösningar levererades i rätt tid.",
+    "total_workexperience": "15 år 3 månader",
+    "techterms": "C#, Angular, .NET, SQL Server, ASP.NET",
+    "expected_salary": 125000,
+    "expected_cost": 35982
+  },
+  {
+    "id": 100000538,
+    "full_name": "Timothy Van Emil A. Lopez",
+    "email": "timothylopez08@gmail.com",
+    "description": "Senior mjukvaruutvecklare med 6 års erfarenhet av utveckling av webbapplikationer och databashantering.",
+    "resume": "100000538_Timothy_Van_Emil_A_Lopez.pdf",
+    "phone_number": "09566092067",
+    "address": "Mandaluyong",
+    "latest_degree": "Bachelor of Science in Information Technology",
+    "latest_university": "Batangas State University",
+    "current_company": "Vishay (Phils) Inc.",
+    "current_position": "Senior webbutvecklare / affärsanalytiker",
+    "current_position_description": "Team Lead, lösningsarkitekt för uppgraderingsprojekt av applikationer för försäljningsprognoser.",
+    "total_workexperience": "6 år 3 månader",
+    "techterms": "ASP.NET, PHP, MySQL, SQL Server, JavaScript",
+    "expected_salary": 75000,
+    "expected_cost": 25800
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "id": 100000018,
+    "full_name": "Lymuel Doming",
+    "email": "lymuel.doming@gmail.com",
+    "description": "Erfaren Linux-systemadministratör med expertis inom AWS, Jenkins och serverautomation. Skicklig i PHP, Python och Shell-skript.",
+    "resume": "100000018_Lymuel_Doming.pdf",
+    "phone_number": "0994635343",
+    "address": "Central Visayas",
+    "latest_degree": "Vocational Diploma / Short Course Certificate in Computer Science/Information Technology",
+    "latest_university": "University of San Carlos",
+    "current_company": "Bibo Global Opportunity",
+    "current_position": "Linux systemadministratör",
+    "current_position_description": "Utforma, hantera och underhålla AWS-servrar, utföra serverautomation och säkerställa serverns tillförlitlighet 24x7x365. Kunnig i AWS-tjänster, Jenkins och skript.",
+    "total_workexperience": "5 år 5 månader",
+    "techterms": "AWS, Jenkins, Shell Scripting, PHP, Python",
+    "expected_salary": 37500,
+    "expected_cost": 18164
+  }
+]
