@@ -5,13 +5,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       throw new Error("Companies section not found!");
     }
 
-    // Fetch companies data
-    const companiesResponse = await fetch("/public/companies.json");
+    // Update fetch path to the correct directory
+    const companiesResponse = await fetch("/public/companies/page_1.json");
     if (!companiesResponse.ok) {
       throw new Error(`HTTP error! status: ${companiesResponse.status}`);
     }
 
-    const companies = await companiesResponse.json();
+    const companiesData = await companiesResponse.json();
+    const companies = companiesData.companies; // Access the companies array from the page data
     console.log("Companies data loaded:", companies);
 
     // Create containers for each company
@@ -55,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <i class="fas fa-users"></i> View Matched Candidates
       `;
 
-      // Handle view candidates click
+      // Update the candidates fetch path in the view button click handler
       viewCandidatesBtn.addEventListener("click", async () => {
         try {
           const candidatesResponse = await fetch(
