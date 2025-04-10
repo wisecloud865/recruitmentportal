@@ -797,16 +797,46 @@ header,
   margin-bottom: 0; /* Remove margin */
 }
 
-#companies .company-header {
-  background: linear-gradient(135deg, var(--dark-pink), var(--primary-pink));
+.company-header {
+  margin-bottom: 1.5rem;
 }
 
-#candidates .candidate-header {
-  background: linear-gradient(
-    135deg,
-    var (--primary-pink),
-    var(--secondary-pink)
-  );
+.table-title1 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 1rem;
+  color: var(--dark-blue);
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+.table-title1 i {
+  color: var(--primary-pink);
+}
+
+.company-type-indicators {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legend-dot.black {
+  background-color: #333;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.legend-dot.pink {
+  background-color: var(--primary-pink);
+  box-shadow: 0 0 5px rgba(224, 160, 163, 0.4);
 }
 
 /* Cell styling */
@@ -2782,7 +2812,6 @@ input[type="tel"] {
   background-color: var(--white);
   padding: 4px 8px;
   border-radius: 4px;
-  display: inline-block;
 }
 
 /* Unified dropdown button styles for both company and candidate tables */
