@@ -1,0 +1,38 @@
+[
+  {
+    "id": 100000433,
+    "full_name": "Ruby Flor De Jesus Blanco",
+    "email": "rubyflordejesus@yahoo.com",
+    "description": "Senior Software Engineer som är skicklig på testmetodik och att leda team.",
+    "resume": "100000433_Ruby_Flor_De_Jesus_Blanco.pdf",
+    "phone_number": "09178079649",
+    "address": "Sta. Rosa City",
+    "latest_degree": "Bachelor of Science: Computer Engineering",
+    "latest_university": "Colegio de San Juan de Letran - Philippines",
+    "current_company": "Edenred",
+    "current_position": "Sr. QA-ingenjör / Automationsingenjör",
+    "current_position_description": "Fokusera på kvalitetssäkring och testning, skapa och underhålla testskript och hantera QA-uppgifter.",
+    "total_workexperience": "11 år, 6 månader",
+    "techterms": "Cypress, TestComplete, Siesta, SQL, Azure DevOps",
+    "expected_salary": 112500,
+    "expected_cost": 33436
+  },
+  {
+    "id": 100001506,
+    "full_name": "Jazmin Galvez",
+    "email": "jgalvez.jobs@gmail.com",
+    "description": "Erfaren QA-ingenjör med expertis inom manuell och automatiserad testning på webb- och mobilplattformar.",
+    "resume": "100001506_Jazmin_Galvez.pdf",
+    "phone_number": "09177370710",
+    "address": "Manila",
+    "latest_degree": "BS – Information Systems",
+    "latest_university": "De La Salle-College of Saint Benilde",
+    "current_company": "Axos Business Center",
+    "current_position": "Ingenjör inom kvalitetssäkring",
+    "current_position_description": "Automatiserar testning av mobilapplikationer med hjälp av Appium för robust testtäckning och utför sanitetstestning med TestIM.",
+    "total_workexperience": "9 år 9 månader",
+    "techterms": "Appium, Selenium, TestIM, Visual Studio, Git",
+    "expected_salary": 87500,
+    "expected_cost": 28345
+  }
+]

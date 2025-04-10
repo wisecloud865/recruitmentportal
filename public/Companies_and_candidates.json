@@ -12,9 +12,9 @@
     "publicerad": "2025-01-14",
     "websearch": "done",
     "kontaktperson1": "Info",
-    "kontakt_email1": "info@e37.ph",
+    "kontakt_email1": "info@e37.se",
     "kontakt_telefon1": "09666476497",
-    "kontakt_email2": "support@e37",
+    "kontakt_email2": "support@e37.se",
     "kontaktperson2": "Support",
     "Techstack": "HTML5, CSS, JavaScript, Figma, CSS Less, Visual Studio, ASP.NET",
     "Produkt": "E-handelsplattform och konsulttjänster för skapande av webbshopar",
@@ -31,6 +31,24 @@
     "openai": "done",
     "matched_candidates": [
       {
+        "id": 100000003,
+        "full_name": "Ricky Estropigan",
+        "email": "rickyestropigan1281@gmail.com",
+        "description": "Duktig webbutvecklare med över 10 års erfarenhet av webbutveckling, webbdesign och programmering. Skicklig på PHP, JavaScript, HTML5, CSS, NodeJs, ReactJs, WordPress, med mera.",
+        "resume": "100000003_Ricky_Estropigan.pdf",
+        "phone_number": "09458628997",
+        "address": "Olongapo City",
+        "latest_degree": "Bachelor of Science in Information Technology",
+        "latest_university": "Online College",
+        "current_company": "iFormatLogic PH",
+        "current_position": "Medgrundare",
+        "current_position_description": "Design och uppbyggnad av varumärken, digitala marknadsföringskampanjer och utveckling av webblösningar för byråer och små och medelstora företag. Fullt ansvar för framgångsrik initiering, planering, kommunikation, övervakning, leverans och överlämnande av digitala projekt.",
+        "total_workexperience": "13 år 9 månader",
+        "techterms": "PHP, JavaScript, HTML5, CSS, WordPress",
+        "expected_salary": 117000,
+        "expected_cost": 25800
+      },
+      {
         "id": 100000054,
         "full_name": "Demric Bautista",
         "email": "demricbautista@gmail.com",
@@ -45,8 +63,8 @@
         "current_position_description": "Demric hanterar 7 olika webbapplikationer för både HR- och ekonomiavdelningarna på Roberts AIPMC.",
         "total_workexperience": "2 år 7 månader",
         "techterms": "HTML5, CSS, Javascript, Jquery, PHP",
-        "expected_salary": 110000,
-        "expected_cost": 11112
+        "expected_salary": 62500,
+        "expected_cost": 23255
       },
       {
         "id": 100000098,
@@ -63,8 +81,8 @@
         "current_position_description": "Utveckla plattformsoberoende spel med hjälp av den senaste HTML5-tekniken för mobiler och datorer.",
         "total_workexperience": "11 år 8 månader",
         "techterms": "HTML5,CSS,JavaScript,Photoshop,Illustrator",
-        "expected_salary": 110000,
-        "expected_cost": 121
+        "expected_salary": 93750,
+        "expected_cost": 29618
       }
     ]
   },
@@ -82,7 +100,7 @@
     "websearch": "done",
     "kontaktperson1": "Click to Hire AB",
     "kontakt_email1": "info@clicktohire.se",
-    "kontakt_telefon1": "09666476497",
+    "kontakt_telefon1": "none",
     "kontakt_email2": "caasikrisha171@gmail.com",
     "Techstack": "Java, Spring Boot, Angular, HTML5, CSS3, JavaScript, AWS- EC2, S3, Lambda, RDS, MySQL, PostgreSQL, MongoDB, Docker, Kubernetes, RESTful APIs, Microservices",
     "Produkt": "IT-tjänster, IT-konsultering, 'Talent Sökning', 'Talent Attraktion', och 'Talent Engagemang'",
@@ -98,6 +116,24 @@
     },
     "openai": "done",
     "matched_candidates": [
+      {
+        "id": 100000062,
+        "full_name": "Rod Christopher Toledo",
+        "email": "rod.c.toledo@accenture.com",
+        "description": "Mjukvaruanalytiker med erfarenhet av webbutveckling och CRM-integration med hjälp av Java och Angular.",
+        "resume": "100000062_Rod_Christopher_Toledo.pdf",
+        "phone_number": "09052181017",
+        "address": "Cebu",
+        "latest_degree": "",
+        "latest_university": "",
+        "current_company": "Accenture",
+        "current_position": "Analytiker inom applikationsutveckling",
+        "current_position_description": "Utveckling av ett CRM-integrationsverktyg med Java och frontend-utveckling med Angular.",
+        "total_workexperience": "3 år 5 månader",
+        "techterms": "Java,Angular,HTML,MySQL,AWS",
+        "expected_salary": 7000,
+        "expected_cost": 35982
+      },
       {
         "id": 100000257,
         "full_name": "John Daryll Moya",

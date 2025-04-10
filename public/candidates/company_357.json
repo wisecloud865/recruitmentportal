@@ -1,0 +1,20 @@
+[
+  {
+    "id": 100001795,
+    "full_name": "Mcniel Viray",
+    "email": "mcnielv@gmail.com",
+    "description": "Erfaren chef för mjukvaruutveckling med kompetens inom teamledarskap och webbutveckling.",
+    "resume": "100001795_Mcniel_Viray.pdf",
+    "phone_number": "09177965336",
+    "address": "Imus City",
+    "latest_degree": "Bachelor of Science in Computer Science",
+    "latest_university": "University of the East",
+    "current_company": "TaskUs",
+    "current_position": "Senior utvecklare",
+    "current_position_description": "Hanterade team för mjukvaruutveckling och L3-support och säkerställde sömlös drift och att projektmålen uppnåddes.",
+    "total_workexperience": "18 år 5 månader",
+    "techterms": "Net,JavaScript,Vue,Angular,Docker",
+    "expected_salary": 125000,
+    "expected_cost": 35982
+  }
+]

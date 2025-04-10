@@ -1,0 +1,20 @@
+[
+  {
+    "id": 100001458,
+    "full_name": "Eugine Jocson",
+    "email": "euinejocson@gmail.com",
+    "description": "Målinriktad webbutvecklare med erfarenhet av PHP/Laravel, fokuserad på samarbete och problemlösning.",
+    "resume": "100001458_Eugine_Jocson.pdf",
+    "phone_number": "09992278759",
+    "address": "Pasay city",
+    "latest_degree": "Bachelor of Science: Information Technology",
+    "latest_university": "STI College Muñoz",
+    "current_company": "ePerformax Contact Centers & BPO",
+    "current_position": "Programmerare",
+    "current_position_description": "Utvecklar webbapplikationer och leder team för appförbättringar, vilket säkerställer effektiva lösningar.",
+    "total_workexperience": "6 år",
+    "techterms": "PHP,Laravel,iOS,XCode,Swift",
+    "expected_salary": 118750,
+    "expected_cost": 34709
+  }
+]

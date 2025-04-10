@@ -1,0 +1,20 @@
+[
+  {
+    "id": 100001540,
+    "full_name": "Misty De Castro Godoy",
+    "email": "godoy.mistydecastro@gmail.com",
+    "description": "Data Engineer Specialist med över 7 års IT-erfarenhet inom Data & Analytics, Agile Methods, ETL och Cloud Technologies.",
+    "resume": "100001540_Misty_De_Castro_Godoy.pdf",
+    "phone_number": "09985871938",
+    "address": "Lobo",
+    "latest_degree": "Bachelor of Science in Information Technology",
+    "latest_university": "Batangas State University",
+    "current_company": "Accenture",
+    "current_position": "Azure Data Engineer Lead",
+    "current_position_description": "Ansvarig för att utforma ETL-ramverk, leda ett team av dataingenjörer och upprätthålla projektstandarder.",
+    "total_workexperience": "8 år 5 månader",
+    "techterms": "Azure,Python,UNIX,ETL,SQL",
+    "expected_salary": 26250,
+    "expected_cost": 15873
+  }
+]

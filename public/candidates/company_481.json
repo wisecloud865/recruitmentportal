@@ -1,0 +1,38 @@
+[
+  {
+    "id": 100000488,
+    "full_name": "Norman Jay C Cabrera",
+    "email": "PLUKNORMANCABRERA@GMAIL.COM",
+    "description": "Erfaren av Google Ads-strategier och försäljning med en bakgrund inom handel.",
+    "resume": "100000488_Norman_Jay_C_Cabrera.pdf",
+    "phone_number": "09292578194",
+    "address": "TAGUIG CITY",
+    "latest_degree": "Bachelor of Science in Commerce Major Management",
+    "latest_university": "Eulogio R. Dizon College of Nueva Ecija",
+    "current_company": "Conduit Social Marketing Agency",
+    "current_position": "Google Ads Manager på deltid",
+    "current_position_description": "Ansvarig för skapande och implementering av Google Ads och resultatrapportering.",
+    "total_workexperience": "11 år 1 månad",
+    "techterms": "Google Ads, Meta Ads, SEO, Excel, CMS",
+    "expected_salary": 50000,
+    "expected_cost": 20709
+  },
+  {
+    "id": 100000606,
+    "full_name": "Jenifer Kuadli",
+    "email": "jenkuadli@gmail.com",
+    "description": "Freelance SEO Blog Manager specialiserad på SEO på sidan med erfarenhet av innehållshantering och dataanalys.",
+    "resume": "100000606_Jenifer_Kuadli.pdf",
+    "phone_number": "09173092331",
+    "address": "Baguio",
+    "latest_degree": "Master in Business Administration",
+    "latest_university": "University of Baguio",
+    "current_company": "TaskUs Lizzy's Nook",
+    "current_position": "Analytiker för affärsinsikter",
+    "current_position_description": "Förbereder rapporter, hämtar data från källor och hjälper till med affärsgenomgångar med fokus på datavisualisering och insikter.",
+    "total_workexperience": "15 år 3 månader",
+    "techterms": "SEO, HTML, Microsoft Office, Data Analysis, Project Management",
+    "expected_salary": 75000,
+    "expected_cost": 25800
+  }
+]

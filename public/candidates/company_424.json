@@ -1,0 +1,20 @@
+[
+  {
+    "id": 100001034,
+    "full_name": "Jonathan Dixon",
+    "email": "jdixonsmail@gmail.com",
+    "description": "Senior DevOps Engineer med omfattande erfarenhet av Azure, CI/CD och anpassade automatiseringslösningar.",
+    "resume": "100001034_Jonathan_Dixon.pdf",
+    "phone_number": "094157246932",
+    "address": "San Francisco",
+    "latest_degree": "Bachelor of Philosophy",
+    "latest_university": "University of San Francisco",
+    "current_company": "Berkshire Hathaway Homestate Companies",
+    "current_position": "Senior DevOps-ingenjör",
+    "current_position_description": "Ansvarig för skriptresurser i Azure, utveckling av CI/CD-pipelines och anpassade automatiseringslösningar.",
+    "total_workexperience": "27 år 7 månader",
+    "techterms": "Terraform,Azure,DevOps,CI/CD,Microservices,Automation",
+    "expected_salary": 187500,
+    "expected_cost": 48709
+  }
+]

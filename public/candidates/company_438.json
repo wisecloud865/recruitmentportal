@@ -1,0 +1,20 @@
+[
+  {
+    "id": 100000035,
+    "full_name": "Jim Paulo C. De Los Trinos",
+    "email": "jmpau.dt95@gmail.com",
+    "description": "Civilingenjör i datateknik med 2 år och 10 månaders erfarenhet av DevOps på Accenture Inc. med specialisering inom CI/CD, Azure DevOps och Sitecore-driftsättningar.",
+    "resume": "100000035_Jim_Paulo_C_De_Los_Trinos.pdf",
+    "phone_number": "09927082289",
+    "address": "Manila",
+    "latest_degree": "Computer Engineering",
+    "latest_university": "Universidad de Manila",
+    "current_company": "Accenture Inc.",
+    "current_position": "DevOps-ingenjör",
+    "current_position_description": "Bygga och underhålla CI/CD-pipelines, distribuera Sitecore med hjälp av Azure PaaS och automatisera infrastruktur med ARM-mallar och PowerShell.",
+    "total_workexperience": "2 år 10 månader",
+    "techterms": "Azure DevOps, PowerShell, Sitecore, CI/CD, ARM Templates",
+    "expected_salary": 75000,
+    "expected_cost": 25800
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "id": 100000036,
+    "full_name": "John Lester T. Bamba",
+    "email": "j.lesterbamba@gmail.com",
+    "description": "Erfaret IT-proffs med expertis inom systemadministration, nätverkssäkerhet och cloud computing. Certifierad inom AWS, cybersäkerhet och IT-support.",
+    "resume": "100000036_John_Lester_T_Bamba.pdf",
+    "phone_number": "09995537596",
+    "address": "Quezon City",
+    "latest_degree": "B.S. Computer Engineering",
+    "latest_university": "Rizal Technological University",
+    "current_company": "Leisure and Resorts World Corporation",
+    "current_position": "Applikationsingenjör",
+    "current_position_description": "Implementera och stödja komplexa företagsbaserade kasinons IT-relaterade applikationer. Hantera produktionssystem, optimera prestanda och tillhandahålla lösningar på problem.",
+    "total_workexperience": "3 år 0 månader",
+    "techterms": "Linux, Cisco, AWS, Cybersecurity, IT Support",
+    "expected_salary": 37500,
+    "expected_cost": 18164
+  },
+  {
+    "id": 100001149,
+    "full_name": "Francis Lazo",
+    "email": "francisallenlazo@gmail.com",
+    "description": "Senior systemingenjör med erfarenhet av mjukvarusupport, IT-säkerhet och affärsanalys.",
+    "resume": "100001149_Francis_Lazo.pdf",
+    "phone_number": "09171920425",
+    "address": "Cainta",
+    "latest_degree": "Bachelor of Science in Information Technology",
+    "latest_university": "Mapúa University",
+    "current_company": "FIS Global",
+    "current_position": "Senior systemingenjör",
+    "current_position_description": "Utföra L0-uppgifter, ärendeövervakning, kundsamtal och delta i utbildningsprogram.",
+    "total_workexperience": "8 år 1 månad",
+    "techterms": "C#, Java, SQL, ITIL, Linux",
+    "expected_salary": 93750,
+    "expected_cost": 29618
+  }
+]

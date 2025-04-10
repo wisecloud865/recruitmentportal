@@ -1,0 +1,38 @@
+[
+  {
+    "id": 100000033,
+    "full_name": "Aries S. Llanera",
+    "email": "aries.llanera@gmail.com",
+    "description": "Skicklig DevOps-ingenjör med expertis inom konfigurationshantering, CI/CD-processer och hantering av molninfrastruktur.",
+    "resume": "100000033_Aries_S_Llanera.pdf",
+    "phone_number": "09154860101",
+    "address": "Caloocan City",
+    "latest_degree": "Bachelor of Science in Computer Engineering",
+    "latest_university": "STI Fairview",
+    "current_company": "Wonders Corporation",
+    "current_position": "DevOps-ingenjör",
+    "current_position_description": "Hantera Jenkins jobbdistributioner, utforma övervakningssystem och konfigurera Logstash för Kibana Elasticsearch-stack.",
+    "total_workexperience": "6 år 1 månad",
+    "techterms": "Jenkins, Kubernetes, Docker, Ansible, Terraform",
+    "expected_salary": 75000,
+    "expected_cost": 25800
+  },
+  {
+    "id": 100001782,
+    "full_name": "Genesis Ancheta",
+    "email": "genex2ancheta@yahoo.com",
+    "description": "Erfaren DevOps Engineer med en 12-årig karriär, skicklig på att hantera tekniska operationer och implementera skalbara lösningar.",
+    "resume": "100001782_Genesis_Ancheta.pdf",
+    "phone_number": "09554350536",
+    "address": "PHILIPPINES",
+    "latest_degree": "Bachelor of Science in Electronics and Communications Engineering",
+    "latest_university": "",
+    "current_company": "ECLARO - Global Delivery - Westfield Specialty Insurance",
+    "current_position": "DevOps-ingenjör",
+    "current_position_description": "Hantera applikationer, stödja driftsättningar och konfigurera Windows-servrar med hjälp av Ansible och Azure DevOps Pipelines.",
+    "total_workexperience": "13 år 0 månader",
+    "techterms": "Azure,AWS,DevOps,Ansible,Kubernetes",
+    "expected_salary": 112500,
+    "expected_cost": 33436
+  }
+]

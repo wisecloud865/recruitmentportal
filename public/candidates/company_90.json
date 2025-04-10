@@ -1,0 +1,38 @@
+[
+  {
+    "id": 100001129,
+    "full_name": "Mark Benedict D. Lutab",
+    "email": "benedictlutab@gmail.com",
+    "description": "Erfaren mjukvaruingenjör med fokus på backend-utveckling, PDF-generering och ekosystem för mikrotjänster.",
+    "resume": "100001129_Mark_Benedict_D_Lutab.pdf",
+    "phone_number": "09294778182",
+    "address": "",
+    "latest_degree": "BS Information Technology",
+    "latest_university": "Polytechnic University of the Philippines",
+    "current_company": "Philippine Digital Asset Exchange (PDAX)",
+    "current_position": "Programvaruingenjör",
+    "current_position_description": "Samarbetade med produktteamet för att utforma och bygga ett system för finansiell reskontra och gav teknisk support.",
+    "total_workexperience": "3 år 9 månader",
+    "techterms": "NodeJS,Docker,RabbitMQ,Redis,AWS",
+    "expected_salary": 125000,
+    "expected_cost": 35982
+  },
+  {
+    "id": 100001866,
+    "full_name": "Hannah Camille Taino",
+    "email": "hannahcamilletaino@gmail.com",
+    "description": "Engagerad senior mjukvaruingenjör med 5 års erfarenhet av frontend-utveckling, webbdesign och kvalitetssäkring.",
+    "resume": "100001866_Hannah_Camille_Taino.pdf",
+    "phone_number": "09369269664",
+    "address": "Cabuyao City",
+    "latest_degree": "Bachelor of Science in Computer Engineering",
+    "latest_university": "Pamantasan ng Cabuyao",
+    "current_company": "Accenture Inc.",
+    "current_position": "Senior mjukvaruutvecklare",
+    "current_position_description": "Involverad i frontend-utveckling, webbdesign, buggfixning och systemunderhåll.",
+    "total_workexperience": "4 år 10 månader",
+    "techterms": "ReactJS, TypeScript, ASPNET, Azure, SQL Server",
+    "expected_salary": 93750,
+    "expected_cost": 29618
+  }
+]

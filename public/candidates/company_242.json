@@ -1,0 +1,20 @@
+[
+  {
+    "id": 100001848,
+    "full_name": "Marcelo Lloyd",
+    "email": "mrcllloyd@gmail.com",
+    "description": "Erfaren Sr. Data Scientist som arbetar med AI/ML-modeller och data pipelines.",
+    "resume": "100001848_Marcelo_Lloyd.pdf",
+    "phone_number": "09611208482",
+    "address": "MNL",
+    "latest_degree": "Juris Doctor",
+    "latest_university": "Pamantasan ng Lungsod ng Maynila",
+    "current_company": "Smart Telocommunication Inc",
+    "current_position": "Senior datavetare",
+    "current_position_description": "Utveckla och underhålla AI/ML-bedrägerimodeller, hantera datavetenskapliga projekt och anpassa dem till affärsbehov.",
+    "total_workexperience": "4 år 4 månader",
+    "techterms": "AI, ML, data, models, databases",
+    "expected_salary": 150000,
+    "expected_cost": 41073
+  }
+]

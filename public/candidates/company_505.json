@@ -1,0 +1,38 @@
+[
+  {
+    "id": 100001069,
+    "full_name": "Justine A. Baguion",
+    "email": "justinealgobaguion@gmail.com",
+    "description": "Enastående och självmotiverad nyutexaminerad kandidat från Bachelor of Science in Information Technology.",
+    "resume": "100001069_Justine_A_Baguion.pdf",
+    "phone_number": "09974251193",
+    "address": "Imus",
+    "latest_degree": "Bachelor of Science in Information Technology",
+    "latest_university": "Cavite State University - Main",
+    "current_company": "Ascendprofit",
+    "current_position": "Webbutvecklare",
+    "current_position_description": "Webbutvecklare på praktik med erfarenhet av webbutveckling och design.",
+    "total_workexperience": "1 år",
+    "techterms": "Web Development, Graphic Design, Programming, SQL, Agile",
+    "expected_salary": 31250,
+    "expected_cost": 16891
+  },
+  {
+    "id": 100001368,
+    "full_name": "Robin Ibañez",
+    "email": "robinibañez48@gmail.com",
+    "description": "Praktikant inom webbutveckling med kompetens inom webbutveckling, programmering och teknisk support.",
+    "resume": "100001368_Robin_Ibañez.pdf",
+    "phone_number": "09293074363",
+    "address": "Valenzuela City",
+    "latest_degree": "Tertiary",
+    "latest_university": "Our Lady of Fatima University",
+    "current_company": "",
+    "current_position": "",
+    "current_position_description": "",
+    "total_workexperience": "0 år 2 månader",
+    "techterms": "Web Development, Programming, Technical Support, Microsoft Office",
+    "expected_salary": 0,
+    "expected_cost": 0
+  }
+]
