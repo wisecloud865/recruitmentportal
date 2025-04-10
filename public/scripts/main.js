@@ -231,20 +231,17 @@ function createCompanyTitle(company) {
 }
 
 function createCompanyTypeIndicators(company) {
-  let indicators = [];
+  let indicator = "";
 
   if (company.consultantcompany) {
-    indicators.push(
-      '<span class="legend-dot black" title="Consultant Company"></span>'
-    );
-  }
-  if (company.recruitmentcompany) {
-    indicators.push(
-      '<span class="legend-dot pink" title="Recruitment Company"></span>'
-    );
+    indicator =
+      '<span class="legend-dot black" title="Consultant Company"></span>';
+  } else if (company.recruitmentcompany) {
+    indicator =
+      '<span class="legend-dot pink" title="Recruitment Company"></span>';
   }
 
-  return indicators.join("");
+  return indicator;
 }
 
 // Add this function after the createCompanyTitle function
