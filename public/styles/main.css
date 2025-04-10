@@ -4423,8 +4423,8 @@ tr.company-hidden {
 /* Company header styling */
 .company-header {
   padding: 1rem;
+  padding-top: 2em;
   margin-bottom: 1.5rem;
-  margin-top: 3em;
   border-radius: 8px;
   text-align: center; /* Center the header */
 }
