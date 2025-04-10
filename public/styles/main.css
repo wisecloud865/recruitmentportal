@@ -1568,11 +1568,7 @@ input[type="tel"] {
   transform: translateX(-50%);
   width: 100px;
   height: 3px;
-  background: linear-gradient(
-    90deg,
-    var(--primary-pink),
-    var(--secondary-pink)
-  );
+
   border-radius: 2px;
 }
 
@@ -1690,22 +1686,6 @@ input[type="tel"] {
   position: relative;
   width: 100%;
   animation: titleFadeIn 0.6s ease-out forwards;
-}
-
-.table-title1::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    var(--primary-pink),
-    var(--secondary-pink)
-  );
-  border-radius: 2px;
 }
 
 .table-title1 i {
