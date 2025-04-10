@@ -51,6 +51,18 @@ function createCompanyTitle(company) {
   `;
 }
 
+// Add this function after the createCompanyTitle function
+function createTableHeader(col1, col2) {
+  const thead = document.createElement("thead");
+  thead.innerHTML = `
+    <tr>
+      <th class="info-label">${col1}</th>
+      <th class="info-value">${col2}</th>
+    </tr>
+  `;
+  return thead;
+}
+
 // Function to show candidates modal
 function showCandidatesModal(candidates, companyName) {
   const modal = document.createElement("div");
