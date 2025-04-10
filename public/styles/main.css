@@ -800,30 +800,32 @@ header,
 .company-header {
   padding: 1rem;
   margin-bottom: 1.5rem;
-  border-radius: 8px;
-  text-align: center; /* Center the header */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  background: none;
 }
 
 .table-title1 {
-  display: inline-flex; /* Change to inline-flex */
+  display: inline-flex;
   align-items: center;
-  justify-content: center; /* Center the content */
-  gap: 0.5rem; /* Reduce gap between elements */
-  margin: 0 auto; /* Center the title container */
+  justify-content: center;
+  gap: 0.5rem;
   color: var(--primary-pink);
   font-size: 1.8em;
   position: relative;
+  margin: 0;
+  padding: 0;
 }
 
 .table-title1 i {
   color: var(--primary-pink);
-  margin-right: 0.5rem; /* Reduce margin */
 }
 
 .company-type-indicators {
-  display: inline-flex; /* Change to inline-flex */
+  display: inline-flex;
   align-items: center;
-  margin-left: 0.5rem; /* Reduce margin */
+  margin-left: 1rem;
   vertical-align: middle;
 }
 
@@ -832,7 +834,6 @@ header,
   height: 12px;
   border-radius: 50%;
   display: inline-block;
-  margin-left: 0.3rem; /* Reduce margin */
 }
 
 .legend-dot.black {
@@ -4423,32 +4424,33 @@ tr.company-hidden {
 /* Company header styling */
 .company-header {
   padding: 1rem;
-  padding-top: 2em;
   margin-bottom: 1.5rem;
-  border-radius: 8px;
-  text-align: center; /* Center the header */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  background: none;
 }
 
 .table-title1 {
-  display: inline-flex; /* Change to inline-flex */
+  display: inline-flex;
   align-items: center;
-  justify-content: center; /* Center the content */
-  gap: 0.5rem; /* Reduce gap between elements */
-  margin: 0 auto; /* Center the title container */
+  justify-content: center;
+  gap: 0.5rem;
   color: var(--primary-pink);
   font-size: 1.8em;
   position: relative;
+  margin: 0;
+  padding: 0;
 }
 
 .table-title1 i {
   color: var(--primary-pink);
-  margin-right: 0.5rem; /* Reduce margin */
 }
 
 .company-type-indicators {
-  display: inline-flex; /* Change to inline-flex */
+  display: inline-flex;
   align-items: center;
-  margin-left: 0.5rem; /* Reduce margin */
+  margin-left: 1rem;
   vertical-align: middle;
 }
 
@@ -4457,7 +4459,6 @@ tr.company-hidden {
   height: 12px;
   border-radius: 50%;
   display: inline-block;
-  margin-left: 0.3rem; /* Reduce margin */
 }
 
 .legend-dot.black {
