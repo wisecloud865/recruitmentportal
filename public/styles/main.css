@@ -4336,7 +4336,6 @@ tr.company-hidden {
   align-items: center;
   gap: 1rem;
   margin: 2rem 0;
-  padding: 1rem;
 }
 
 .pagination-btn {
@@ -4350,12 +4349,11 @@ tr.company-hidden {
   padding: 0.5rem 1rem;
   border-radius: 25px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .pagination-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(224, 160, 163, 0.4);
 }
 
 .pagination-btn:disabled {
@@ -4364,12 +4362,9 @@ tr.company-hidden {
 }
 
 .page-info {
-  font-size: 1rem;
   color: var(--text-color);
-  padding: 0.5rem 1rem;
-  background: #f8f9fa;
-  border-radius: 15px;
 }
+
 .back-to-top {
   position: fixed;
   bottom: 20px;

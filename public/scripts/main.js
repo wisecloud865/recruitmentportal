@@ -30,6 +30,68 @@ function showNotification(message, isSuccess) {
   setTimeout(() => notification.remove(), 3000);
 }
 
+// Function to create company title with indicators
+function createCompanyTitle(company) {
+  return `
+    <div class="company-header">
+      <h2 class="company-name">${company.företagsnamn}</h2>
+      <div class="company-type-indicators">
+        ${
+          company.consultantcompany
+            ? '<span class="badge consultant">Consultant Company</span>'
+            : ""
+        }
+        ${
+          company.recruitmentcompany
+            ? '<span class="badge recruitment">Recruitment Company</span>'
+            : ""
+        }
+      </div>
+    </div>
+  `;
+}
+
+// Function to show candidates modal
+function showCandidatesModal(candidates, companyName) {
+  const modal = document.createElement("div");
+  modal.className = "candidates-modal";
+  modal.innerHTML = `
+    <div class="candidates-modal-content">
+      <div class="candidates-modal-header">
+        <h3>Matched Candidates for ${companyName}</h3>
+        <button class="close-modal-btn">&times;</button>
+      </div>
+      <div class="candidates-grid">
+        ${candidates
+          .map(
+            (candidate) => `
+          <div class="candidate-card">
+            <div class="candidate-header">
+              <h4>${candidate.full_name}</h4>
+            </div>
+            <div class="candidate-info">
+              <p><strong>Experience:</strong> ${candidate.total_workexperience}</p>
+              <p><strong>Tech Stack:</strong> ${candidate.techterms}</p>
+              <p><strong>Expected Salary:</strong> ${candidate.expected_salary}</p>
+            </div>
+          </div>
+        `
+          )
+          .join("")}
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  // Handle modal close
+  const closeBtn = modal.querySelector(".close-modal-btn");
+  closeBtn.addEventListener("click", () => modal.remove());
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.remove();
+  });
+}
+
 // Update your DOMContentLoaded event listener
 document.addEventListener("DOMContentLoaded", async () => {
   try {
@@ -65,68 +127,159 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     const metadata = await metadataResponse.json();
 
-    // Move pagination container to bottom
-    const paginationWrapper = document.createElement("div");
-    paginationWrapper.className = "pagination-wrapper";
+    // Move pagination container to companiesSection
     const paginationContainer = document.createElement("div");
     paginationContainer.className = "pagination-controls";
-    paginationWrapper.appendChild(paginationContainer);
-    document.body.appendChild(paginationWrapper);
+    companiesSection.appendChild(paginationContainer);
 
     // Function to render companies for a page
     async function renderCompaniesPage(pageNumber) {
       try {
-        // Clear existing companies
         const existingCompanies =
           companiesSection.querySelectorAll(".company-container");
         existingCompanies.forEach((container) => container.remove());
 
-        // Load and render new page
         const pageData = await loadCompaniesPage(pageNumber);
         const companies = pageData.companies;
 
-        // Create containers for each company
         companies.forEach((company, index) => {
           const companyContainer = document.createElement("div");
           companyContainer.className = "company-container";
 
-          // Create company info table
+          // Create company title with indicators
+          const companyTitle = document.createElement("div");
+          companyTitle.innerHTML = createCompanyTitle(company);
+          companyContainer.appendChild(companyTitle);
+
+          // Company Table
           const companyTable = document.createElement("table");
           companyTable.className = "info-table";
+          companyTable.appendChild(
+            createTableHeader("Company Information", "Details")
+          );
+          const companyTbody = document.createElement("tbody");
 
-          // Add header
-          const tableHeader = document.createElement("thead");
-          tableHeader.innerHTML = `
-            <tr>
-              <th class="info-label">Field</th>
-              <th class="info-value">Value</th>
-            </tr>
-          `;
-          companyTable.appendChild(tableHeader);
+          // Define default company fields
+          const defaultCompanyFields = [
+            { label: "Titel", key: "titel" },
+            { label: "Företagswebb", key: "företagswebb" },
+            { label: "Kontakt Email 1", key: "kontakt_email1" },
+            { label: "Kontakt Email 2", key: "kontakt_email2" },
+            { label: "Kontakt Person 1", key: "kontaktperson1" },
+            { label: "Kontakt Telefon", key: "kontakt_telefon1" },
+          ];
 
-          // Add company info rows
-          const tbody = document.createElement("tbody");
-          Object.entries(company).forEach(([key, value]) => {
-            if (key !== "id") {
-              const row = document.createElement("tr");
+          // Add default company fields
+          defaultCompanyFields.forEach((field) => {
+            const row = document.createElement("tr");
+            row.className = "company-row";
+            let value = company[field.key] || "N/A";
+
+            if (field.key.toLowerCase().includes("webb")) {
               row.innerHTML = `
-                <td class="info-label">${key}</td>
-                <td class="info-value">${formatValue(value)}</td>
+                <td class="info-label">${field.label}</td>
+                <td class="info-value">${createWebLink(value)}</td>
               `;
-              tbody.appendChild(row);
+            } else if (field.key.toLowerCase().includes("email")) {
+              const containerId = `email-${field.key}-${index}`;
+              row.innerHTML = `
+                <td class="info-label">${field.label}</td>
+                <td class="info-value">${createEditableEmailField(
+                  value,
+                  containerId
+                )}</td>
+              `;
+
+              setTimeout(
+                () =>
+                  setupEditableField(
+                    document.getElementById(containerId),
+                    value,
+                    field.key,
+                    "email",
+                    company,
+                    index
+                  ),
+                0
+              );
+            } else if (field.key.toLowerCase().includes("telefon")) {
+              const containerId = `phone-${field.key}-${index}`;
+              row.innerHTML = `
+                <td class="info-label">${field.label}</td>
+                <td class="info-value">${createEditablePhoneField(
+                  value,
+                  containerId
+                )}</td>
+              `;
+
+              setTimeout(
+                () =>
+                  setupEditableField(
+                    document.getElementById(containerId),
+                    value,
+                    field.key,
+                    "phone",
+                    company,
+                    index
+                  ),
+                0
+              );
+            } else {
+              row.innerHTML = `
+                <td class="info-label">${field.label}</td>
+                <td class="info-value">${value}</td>
+              `;
+            }
+            companyTbody.appendChild(row);
+          });
+
+          // Add other company information as hidden rows
+          Object.entries(company).forEach(([key, value]) => {
+            if (
+              !defaultCompanyFields.some((field) => field.key === key) &&
+              key !== "id" &&
+              key !== "företagsnamn" &&
+              key !== "consultantcompany" &&
+              key !== "recruitmentcompany"
+            ) {
+              const row = document.createElement("tr");
+              row.className = "company-hidden";
+              row.style.display = "none";
+              row.innerHTML = `
+                <td class="info-label">${key
+                  .replace(/_/g, " ")
+                  .toUpperCase()}</td>
+                <td class="info-value">${value || "N/A"}</td>
+              `;
+              companyTbody.appendChild(row);
             }
           });
-          companyTable.appendChild(tbody);
+
+          companyTable.appendChild(companyTbody);
           companyContainer.appendChild(companyTable);
 
-          // Add "View Candidates" button
+          // Add company dropdown button
+          const companyDropdownBtn = document.createElement("button");
+          companyDropdownBtn.className = "dropdown-btn company-dropdown-btn";
+          companyDropdownBtn.innerHTML =
+            'Show More Company Info <i class="fas fa-caret-down"></i>';
+          companyContainer.appendChild(companyDropdownBtn);
+
+          // Setup company dropdown functionality
+          handleCompanyDropdown(
+            companyContainer,
+            companyTable,
+            companyDropdownBtn
+          );
+
+          // Add View Candidates button
           const viewCandidatesBtn = document.createElement("button");
           viewCandidatesBtn.className = "view-candidates-btn";
-          viewCandidatesBtn.innerHTML = `
-            <i class="fas fa-users"></i> View Matched Candidates
-          `;
+          viewCandidatesBtn.innerHTML =
+            '<i class="fas fa-users"></i> View Matched Candidates';
+          companyContainer.appendChild(viewCandidatesBtn);
 
-          // Update the candidates fetch path in the view button click handler
+          // Handle View Candidates click
           viewCandidatesBtn.addEventListener("click", async () => {
             try {
               const candidatesResponse = await fetch(
@@ -137,60 +290,17 @@ document.addEventListener("DOMContentLoaded", async () => {
               }
 
               const candidates = await candidatesResponse.json();
-
-              // Create modal for candidates
-              const modal = document.createElement("div");
-              modal.className = "candidates-modal";
-              modal.innerHTML = `
-                <div class="candidates-modal-content">
-                  <div class="candidates-modal-header">
-                    <h3>Matched Candidates for ${company.företagsnamn}</h3>
-                    <button class="close-modal-btn">&times;</button>
-                  </div>
-                  <div class="candidates-grid">
-                    ${candidates
-                      .map(
-                        (candidate) => `
-                      <div class="candidate-card">
-                        <div class="candidate-header">
-                          <h4>${candidate.full_name}</h4>
-                        </div>
-                        <div class="candidate-info">
-                          <p><strong>Experience:</strong> ${candidate.total_workexperience}</p>
-                          <p><strong>Tech Stack:</strong> ${candidate.techterms}</p>
-                          <p><strong>Expected Salary:</strong> ${candidate.expected_salary}</p>
-                        </div>
-                      </div>
-                    `
-                      )
-                      .join("")}
-                  </div>
-                </div>
-              `;
-
-              document.body.appendChild(modal);
-
-              // Handle modal close
-              const closeBtn = modal.querySelector(".close-modal-btn");
-              closeBtn.addEventListener("click", () => modal.remove());
-              modal.addEventListener("click", (e) => {
-                if (e.target === modal) modal.remove();
-              });
+              showCandidatesModal(candidates, company.företagsnamn);
             } catch (error) {
               console.error("Error loading candidates:", error);
               showNotification("No candidates found for this company", false);
             }
           });
 
-          companyContainer.appendChild(viewCandidatesBtn);
           companiesSection.appendChild(companyContainer);
         });
 
-        // Update pagination controls
         updatePaginationControls(pageNumber, metadata.totalPages);
-
-        // Ensure pagination wrapper stays at bottom
-        document.body.appendChild(paginationWrapper);
       } catch (error) {
         console.error("Error loading page:", error);
         showNotification(`Failed to load page ${pageNumber}`, false);
@@ -202,14 +312,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       paginationContainer.innerHTML = `
         <button class="pagination-btn" ${currentPage === 1 ? "disabled" : ""} 
                 onclick="loadPage(${currentPage - 1})">
-          Previous
+          <i class="fas fa-chevron-left"></i>
         </button>
-        <span class="page-info">Page ${currentPage} of ${totalPages}</span>
+        <span class="page-info">${currentPage} / ${totalPages}</span>
         <button class="pagination-btn" ${
           currentPage === totalPages ? "disabled" : ""
         } 
                 onclick="loadPage(${currentPage + 1})">
-          Next
+          <i class="fas fa-chevron-right"></i>
         </button>
       `;
     }
