@@ -30,6 +30,173 @@ function showNotification(message, isSuccess) {
   setTimeout(() => notification.remove(), 3000);
 }
 
+// Add these helper functions at the top of your file
+function createEditableEmailField(value, containerId) {
+  return `
+    <div id="${containerId}" class="editable-field">
+      <div class="display-value">
+        ${
+          value === "N/A" || !value
+            ? '<span class="empty-field">No email provided</span>'
+            : `<a href="mailto:${value}" class="link email-link">
+              <i class="fas fa-envelope"></i> ${value}
+             </a>`
+        }
+        <button class="edit-btn" title="Edit email">
+          <i class="fas fa-edit"></i> Edit
+        </button>
+      </div>
+      <div class="edit-form hidden">
+        <input type="email" class="form-input" value="${
+          value === "N/A" ? "" : value
+        }" placeholder="Enter email address">
+        <div class="button-group">
+          <button class="save-btn">
+            <i class="fas fa-check"></i> Save
+          </button>
+          <button class="cancel-btn">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function createEditablePhoneField(value, containerId) {
+  return `
+    <div id="${containerId}" class="editable-field">
+      <div class="display-value">
+        ${
+          value === "N/A" || !value
+            ? '<span class="empty-field">No phone number provided</span>'
+            : `<a href="tel:${value}" class="link phone-link">
+              <i class="fas fa-phone"></i> ${value}
+             </a>`
+        }
+        <button class="edit-btn" title="Edit phone">
+          <i class="fas fa-edit"></i> Edit
+        </button>
+      </div>
+      <div class="edit-form hidden">
+        <input type="tel" class="form-input" value="${
+          value === "N/A" ? "" : value
+        }" placeholder="Enter phone number">
+        <div class="button-group">
+          <button class="save-btn">
+            <i class="fas fa-check"></i> Save
+          </button>
+          <button class="cancel-btn">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function setupEditableField(
+  container,
+  initialValue,
+  fieldKey,
+  type,
+  company,
+  index
+) {
+  if (!container) return;
+
+  const displayValue = container.querySelector(".display-value");
+  const editForm = container.querySelector(".edit-form");
+  const editBtn = container.querySelector(".edit-btn");
+  const saveBtn = container.querySelector(".save-btn");
+  const cancelBtn = container.querySelector(".cancel-btn");
+  const input = container.querySelector(".form-input");
+
+  editBtn.addEventListener("click", () => {
+    displayValue.classList.add("hidden");
+    editForm.classList.remove("hidden");
+    input.focus();
+  });
+
+  saveBtn.addEventListener("click", async () => {
+    const newValue = input.value.trim();
+    if (newValue === initialValue) {
+      displayValue.classList.remove("hidden");
+      editForm.classList.add("hidden");
+      return;
+    }
+
+    try {
+      // Here you would typically update the value in your backend
+      company[fieldKey] = newValue;
+
+      // Update the display
+      const linkContainer = displayValue.querySelector(
+        type === "email" ? ".email-link" : ".phone-link"
+      );
+      if (newValue) {
+        if (linkContainer) {
+          linkContainer.href =
+            type === "email" ? `mailto:${newValue}` : `tel:${newValue}`;
+          linkContainer.innerHTML = `<i class="fas fa-${
+            type === "email" ? "envelope" : "phone"
+          }"></i> ${newValue}`;
+        } else {
+          displayValue.innerHTML = `
+            <a href="${type === "email" ? "mailto:" : "tel:"}${newValue}" 
+               class="link ${type}-link">
+              <i class="fas fa-${
+                type === "email" ? "envelope" : "phone"
+              }"></i> ${newValue}
+            </a>
+            <button class="edit-btn" title="Edit ${type}">
+              <i class="fas fa-edit"></i> Edit
+            </button>
+          `;
+        }
+      } else {
+        displayValue.innerHTML = `
+          <span class="empty-field">No ${type} provided</span>
+          <button class="edit-btn" title="Edit ${type}">
+            <i class="fas fa-edit"></i> Edit
+          </button>
+        `;
+      }
+
+      displayValue.classList.remove("hidden");
+      editForm.classList.add("hidden");
+      showNotification(
+        `${type.charAt(0).toUpperCase() + type.slice(1)} updated successfully`,
+        true
+      );
+    } catch (error) {
+      console.error(`Error updating ${type}:`, error);
+      showNotification(`Failed to update ${type}`, false);
+    }
+  });
+
+  cancelBtn.addEventListener("click", () => {
+    input.value = initialValue;
+    displayValue.classList.remove("hidden");
+    editForm.classList.add("hidden");
+  });
+}
+
+function handleCompanyDropdown(container, table, button) {
+  const hiddenRows = table.querySelectorAll(".company-hidden");
+  let isExpanded = false;
+
+  button.addEventListener("click", () => {
+    isExpanded = !isExpanded;
+    hiddenRows.forEach((row) => {
+      row.style.display = isExpanded ? "table-row" : "none";
+    });
+    button.innerHTML = isExpanded
+      ? 'Show Less Company Info <i class="fas fa-caret-up"></i>'
+      : 'Show More Company Info <i class="fas fa-caret-down"></i>';
+  });
+}
+
 // Function to create company title with indicators
 function createCompanyTitle(company) {
   return `
