@@ -63,6 +63,24 @@ function createTableHeader(col1, col2) {
   return thead;
 }
 
+// Add these helper functions at the top of your file
+function createWebLink(value) {
+  if (value === "N/A" || !value) {
+    return '<span class="empty-field">No website provided</span>';
+  }
+
+  // Add https:// if not present
+  const url = value.startsWith("http") ? value : `https://${value}`;
+  return `
+    <a href="${url}" 
+       class="link web-link" 
+       target="_blank" 
+       rel="noopener noreferrer">
+      <i class="fas fa-globe"></i> ${value}
+    </a>
+  `;
+}
+
 // Function to show candidates modal
 function showCandidatesModal(candidates, companyName) {
   const modal = document.createElement("div");
