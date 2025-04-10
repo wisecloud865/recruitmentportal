@@ -182,18 +182,35 @@ function setupEditableField(
   });
 }
 
-function handleCompanyDropdown(container, table, button) {
-  const hiddenRows = table.querySelectorAll(".company-hidden");
-  let isExpanded = false;
+// Function to handle company dropdown
+function handleCompanyDropdown(companyContainer, companyTable, dropdownBtn) {
+  // Select ONLY rows from the company table with company-hidden class
+  const hiddenRows = Array.from(
+    companyTable.querySelectorAll("tr.company-hidden")
+  );
 
-  button.addEventListener("click", () => {
-    isExpanded = !isExpanded;
+  // Initially hide rows
+  hiddenRows.forEach((row) => {
+    row.style.display = "none";
+  });
+
+  dropdownBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const isExpanded = dropdownBtn.classList.contains("active");
+
+    // Toggle button active state
+    dropdownBtn.classList.toggle("active");
+    companyContainer.classList.toggle("expanded");
+
+    // Toggle visibility of hidden rows
     hiddenRows.forEach((row) => {
-      row.style.display = isExpanded ? "table-row" : "none";
+      row.style.display = isExpanded ? "none" : "table-row";
     });
-    button.innerHTML = isExpanded
-      ? 'Show Less Company Info <i class="fas fa-caret-up"></i>'
-      : 'Show More Company Info <i class="fas fa-caret-down"></i>';
+
+    // Update button text and icon
+    dropdownBtn.innerHTML = isExpanded
+      ? 'Show More Company Info <i class="fas fa-caret-down"></i>'
+      : 'Show Less Company Info <i class="fas fa-caret-up"></i>';
   });
 }
 
@@ -201,19 +218,21 @@ function handleCompanyDropdown(container, table, button) {
 function createCompanyTitle(company) {
   return `
     <div class="company-header">
-      <h2 class="company-name">${company.företagsnamn}</h2>
-      <div class="company-type-indicators">
-        ${
-          company.consultantcompany
-            ? '<span class="badge consultant">Consultant Company</span>'
-            : ""
-        }
-        ${
-          company.recruitmentcompany
-            ? '<span class="badge recruitment">Recruitment Company</span>'
-            : ""
-        }
-      </div>
+      <h2 class="company-name">
+        ${company.företagsnamn}
+        <div class="company-type-indicators">
+          ${
+            company.consultantcompany
+              ? '<span class="badge consultant">Consultant Company</span>'
+              : ""
+          }
+          ${
+            company.recruitmentcompany
+              ? '<span class="badge recruitment">Recruitment Company</span>'
+              : ""
+          }
+        </div>
+      </h2>
     </div>
   `;
 }
@@ -440,13 +459,13 @@ document.addEventListener("DOMContentLoaded", async () => {
               key !== "recruitmentcompany"
             ) {
               const row = document.createElement("tr");
-              row.className = "company-hidden";
-              row.style.display = "none";
+              row.className = "company-hidden"; // Add this class for hidden rows
+              row.style.display = "none"; // Initially hide the row
               row.innerHTML = `
                 <td class="info-label">${key
                   .replace(/_/g, " ")
                   .toUpperCase()}</td>
-                <td class="info-value">${value || "N/A"}</td>
+                <td class="info-value">${formatValue(value)}</td>
               `;
               companyTbody.appendChild(row);
             }
