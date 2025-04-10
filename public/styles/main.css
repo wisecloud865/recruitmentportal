@@ -4404,3 +4404,50 @@ tr.company-hidden {
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
   margin-top: 2rem;
 }
+
+/* Company header styling */
+.company-header {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  background: none; /* Remove background */
+}
+
+.table-title1 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+  color: var(--primary-pink);
+  font-size: 1.8em;
+  position: relative;
+}
+
+.table-title1 i {
+  color: var(--primary-pink);
+  margin-right: 10px;
+}
+
+.company-type-indicators {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+.legend-dot.black {
+  background-color: #333;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.legend-dot.pink {
+  background-color: var(--primary-pink);
+  box-shadow: 0 0 5px rgba(224, 160, 163, 0.4);
+}
