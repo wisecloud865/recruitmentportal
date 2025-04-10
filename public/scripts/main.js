@@ -233,20 +233,21 @@ function createCompanyTitle(company) {
 }
 
 function createCompanyTypeIndicators(company) {
-  // Check consultantcompany and recruitmentcompany values from JSON
+  // Check if company is consultant or recruitment
   const isConsultant =
     company.consultantcompany === true || company.consultantcompany === "true";
   const isRecruitment =
     company.recruitmentcompany === true ||
     company.recruitmentcompany === "true";
 
-  // Return only one dot based on company type
+  // Return only one dot based on type
   if (isConsultant) {
     return '<span class="legend-dot black" title="Consultant Company"></span>';
   } else if (isRecruitment) {
     return '<span class="legend-dot pink" title="Recruitment Company"></span>';
   }
-  return ""; // Return empty string if neither type
+
+  return ""; // Return empty if neither type
 }
 
 // Add this function after the createCompanyTitle function
