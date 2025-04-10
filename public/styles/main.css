@@ -4376,3 +4376,43 @@ tr.company-hidden {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(224, 160, 163, 0.4);
 }
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 1rem;
+}
+
+.pagination-btn {
+  background: linear-gradient(
+    135deg,
+    var(--primary-pink) 0%,
+    var(--secondary-pink) 100%
+  );
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(224, 160, 163, 0.4);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-size: 1rem;
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  background: #f8f9fa;
+  border-radius: 15px;
+}
