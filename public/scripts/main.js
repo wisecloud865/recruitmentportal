@@ -214,27 +214,37 @@ function handleCompanyDropdown(companyContainer, companyTable, dropdownBtn) {
   });
 }
 
-// Function to create company title with indicators
+// Update the createCompanyTitle function
 function createCompanyTitle(company) {
+  const companyName = company.företagsnamn || "N/A";
+  const companyTypeIndicators = createCompanyTypeIndicators(company);
+
   return `
-    <div class="company-header">
-      <h2 class="company-name">
-        ${company.företagsnamn}
-        <div class="company-type-indicators">
-          ${
-            company.consultantcompany
-              ? '<span class="badge consultant">Consultant Company</span>'
-              : ""
-          }
-          ${
-            company.recruitmentcompany
-              ? '<span class="badge recruitment">Recruitment Company</span>'
-              : ""
-          }
-        </div>
-      </h2>
-    </div>
+    <h3 class="company-title">
+      <i class="fas fa-building"></i>
+      ${companyName}
+      <div class="company-type-indicators">
+        ${companyTypeIndicators}
+      </div>
+    </h3>
   `;
+}
+
+function createCompanyTypeIndicators(company) {
+  let indicators = [];
+
+  if (company.consultantcompany) {
+    indicators.push(
+      '<span class="legend-dot black" title="Consultant Company"></span>'
+    );
+  }
+  if (company.recruitmentcompany) {
+    indicators.push(
+      '<span class="legend-dot pink" title="Recruitment Company"></span>'
+    );
+  }
+
+  return indicators.join("");
 }
 
 // Add this function after the createCompanyTitle function
